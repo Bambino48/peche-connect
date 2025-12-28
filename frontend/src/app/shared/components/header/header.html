@@ -1,0 +1,27 @@
+<header class="header">
+  <div class="logo">
+    <ng-icon name="heroShoppingCart"></ng-icon>
+    <span>Pêche Connect</span>
+  </div>
+
+  <!-- Bouton burger (mobile) -->
+  <button class="burger" (click)="toggleMenu()">
+    <ng-icon name="heroBars3"></ng-icon>
+  </button>
+
+  <nav class="nav" [class.open]="menuOpen">
+    <a routerLink="/" (click)="closeMenu()">
+      Accueil
+    </a>
+
+    <a routerLink="/login" (click)="closeMenu()">
+      <ng-icon name="heroArrowRightOnRectangle"></ng-icon>
+      Connexion
+    </a>
+
+    <a routerLink="/register" class="btn" (click)="closeMenu()">
+      <ng-icon name="heroUserPlus"></ng-icon>
+      Inscription
+    </a>
+  </nav>
+</header>

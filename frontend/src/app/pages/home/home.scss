@@ -1,0 +1,262 @@
+/* ===========================
+   HERO
+=========================== */
+
+.hero {
+  background: linear-gradient(
+    to right,
+    var(--color-primary-dark),
+    var(--color-primary)
+  );
+  color: var(--color-white);
+  padding: 80px 20px;
+}
+
+.hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.hero h1 {
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #e6eef3;
+}
+
+.hero-actions {
+  margin-top: 30px;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* ===========================
+   BOUTONS
+=========================== */
+
+.btn-primary {
+  padding: 12px 24px;
+  background: var(--color-white);
+  color: var(--color-primary);
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-secondary {
+  padding: 12px 24px;
+  background: transparent;
+  color: var(--color-white);
+  border: 2px solid var(--color-white);
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+/* ===========================
+   FEATURES
+=========================== */
+
+.features {
+  padding: 80px 20px;
+  background: var(--color-bg-light);
+}
+
+.features h2 {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 50px;
+  color: var(--color-primary);
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.feature-card {
+  background: var(--color-white);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card h3 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: var(--color-text-main);
+}
+
+.feature-card p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+.feature-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* ===========================
+   HOW IT WORKS
+=========================== */
+
+.how-it-works {
+  padding: 80px 20px;
+  background: var(--color-white);
+}
+
+.how-it-works h2 {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 50px;
+  color: var(--color-primary);
+}
+
+.steps-container {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.steps-card {
+  background: var(--color-bg-light);
+  padding: 40px;
+  border-radius: 16px;
+  width: 320px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.steps-card h3 {
+  font-size: 22px;
+  margin-bottom: 20px;
+  color: var(--color-text-main);
+}
+
+.steps-card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.steps-card li {
+  font-size: 16px;
+  margin-bottom: 14px;
+  color: var(--color-text-secondary);
+}
+
+.steps-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* ===========================
+   FINAL CTA
+=========================== */
+
+.final-cta {
+  padding: 80px 20px;
+  background: var(--color-primary-dark);
+  color: var(--color-white);
+  text-align: center;
+}
+
+.final-cta h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.final-cta p {
+  font-size: 18px;
+  margin-bottom: 30px;
+  color: #e6eef3;
+}
+
+.cta-actions {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.final-cta .btn-primary {
+  background: var(--color-accent);
+  color: #000;
+}
+
+.final-cta .btn-secondary {
+  border: 2px solid var(--color-white);
+  color: var(--color-white);
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 60px 16px;
+    text-align: center;
+  }
+
+  .hero-content {
+    max-width: 100%;
+  }
+
+  .hero-actions {
+    justify-content: center;
+  }
+
+  .features,
+  .how-it-works,
+  .final-cta {
+    padding: 60px 16px;
+  }
+
+  .features-grid {
+    gap: 20px;
+  }
+
+  .steps-container {
+    gap: 20px;
+  }
+
+  .steps-card {
+    width: 100%;
+    max-width: 360px;
+  }
+
+  .cta-actions {
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .cta-actions button {
+    width: 100%;
+  }
+}

@@ -1,0 +1,47 @@
+/* ===========================
+   DESIGN SYSTEM – GLOBAL
+=========================== */
+
+:root {
+  /* Couleurs principales */
+  --color-primary: #0a4f70;
+  --color-primary-dark: #083a52;
+
+  /* Backgrounds */
+  --color-bg-light: #f2f7fa;
+  --color-white: #ffffff;
+
+  /* Accent (conversion, CTA) */
+  --color-accent: #f59e0b;
+
+  /* Textes */
+  --color-text-main: #0f172a;
+  --color-text-secondary: #475569;
+}
+
+/* ===========================
+   BASE GLOBALE
+=========================== */
+
+a,
+button {
+  transition: color 0.25s ease,
+              background-color 0.25s ease,
+              border-color 0.25s ease,
+              box-shadow 0.25s ease,
+              transform 0.25s ease;
+}
+
+/* ===========================
+   TYPOGRAPHIE RESPONSIVE
+=========================== */
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 28px;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+}
