@@ -1,0 +1,55 @@
+<section class="auth">
+  <div class="auth-card">
+    <h1>Inscription</h1>
+
+    <form (ngSubmit)="submit()">
+      <input
+        type="text"
+        placeholder="Nom complet"
+        name="fullName"
+        [(ngModel)]="formData.fullName"
+        required
+      />
+
+      <input
+        type="tel"
+        placeholder="Téléphone"
+        name="phone"
+        [(ngModel)]="formData.phone"
+        required
+      />
+
+      <input
+        type="email"
+        placeholder="Email"
+        name="email"
+        [(ngModel)]="formData.email"
+        required
+      />
+
+      <input
+        type="password"
+        placeholder="Mot de passe"
+        name="password"
+        [(ngModel)]="formData.password"
+        required
+      />
+
+      <select
+        name="role"
+        [(ngModel)]="formData.role"
+        required
+      >
+        <option value="" disabled>
+          Sélectionnez votre rôle
+        </option>
+        <option value="BUYER">Acheteur</option>
+        <option value="SELLER">Pêcheur / Vendeur</option>
+      </select>
+
+      <button type="submit">
+        Créer mon compte
+      </button>
+    </form>
+  </div>
+</section>

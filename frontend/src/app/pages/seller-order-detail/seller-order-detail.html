@@ -1,0 +1,103 @@
+<section class="order-detail-page">
+
+  <!-- HEADER -->
+  <div class="page-header">
+    <div>
+      <h1>Détail de la commande #{{ order.id }}</h1>
+      <p class="subtitle">Commande passée le {{ order.created_at }}</p>
+    </div>
+
+    <button class="btn-back" routerLink="/orders">
+      ← Retour
+    </button>
+  </div>
+
+  <!-- INFO CARDS -->
+  <div class="order-summary">
+
+    <!-- COMMANDE -->
+    <div class="summary-card">
+      <h3>Commande</h3>
+
+      <div class="summary-row">
+        <span>Date</span>
+        <strong>{{ order.created_at }}</strong>
+      </div>
+
+      <div class="summary-row">
+        <span>Statut</span>
+        <span class="status" [ngClass]="order.order_status">
+          {{ order.order_status }}
+        </span>
+      </div>
+
+      <div class="summary-row">
+        <span>Total</span>
+        <strong>{{ order.total_price | number }} FCFA</strong>
+      </div>
+
+      <div class="summary-row">
+        <span>Adresse</span>
+        <strong>{{ order.delivery_address }}</strong>
+      </div>
+    </div>
+
+    <!-- CLIENT -->
+    <div class="summary-card">
+      <h3>Client</h3>
+
+      <div class="summary-row">
+        <span>Nom</span>
+        <strong>{{ order.client.full_name }}</strong>
+      </div>
+
+      <div class="summary-row">
+        <span>Téléphone</span>
+        <strong>{{ order.client.phone }}</strong>
+      </div>
+
+      <div class="summary-row">
+        <span>Email</span>
+        <strong>{{ order.client.email }}</strong>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- PRODUITS -->
+  <div class="items-card">
+    <h3>Produits commandés</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Produit</th>
+          <th>Quantité (kg)</th>
+          <th>Prix unitaire</th>
+          <th>Sous-total</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let item of order.items">
+          <td class="product-name">{{ item.product_name }}</td>
+          <td>{{ item.quantity_kg }}</td>
+          <td>{{ item.unit_price | number }} FCFA</td>
+          <td class="subtotal">{{ item.subtotal | number }} FCFA</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ACTIONS -->
+  <div class="order-actions">
+    <button class="btn-primary" (click)="confirmOrder()">
+      Confirmer la commande
+    </button>
+
+    <button class="btn-secondary" (click)="markAsDelivered()">
+      Marquer comme livrée
+    </button>
+  </div>
+
+</section>

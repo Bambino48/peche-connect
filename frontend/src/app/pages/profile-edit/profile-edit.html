@@ -1,0 +1,44 @@
+<section class="profile-edit">
+  <div class="edit-card">
+    <h1>Modifier mon profil</h1>
+
+    <!-- Photo -->
+    <div class="photo-section">
+      <div class="avatar">
+        <img *ngIf="previewPhoto; else placeholder" [src]="previewPhoto" alt="Photo de profil" />
+
+        <ng-template #placeholder>
+          <span>Photo</span>
+        </ng-template>
+      </div>
+
+      <input type="file" accept="image/*" hidden #fileInput (change)="onPhotoSelected($event)" />
+
+      <button type="button" class="photo-btn" (click)="fileInput.click()">
+        Changer la photo
+      </button>
+    </div>
+
+    <!-- Formulaire -->
+    <form (ngSubmit)="saveProfile()">
+      <input type="text" placeholder="Nom complet" [(ngModel)]="user.full_name" name="fullName" required />
+
+      <input type="tel" placeholder="Téléphone" [(ngModel)]="user.phone" name="phone" required />
+
+      <input type="email" placeholder="Email" [(ngModel)]="user.email" name="email" required />
+
+      <input type="text" placeholder="Localisation" [(ngModel)]="user.location" name="location" />
+
+      <!-- Boutons -->
+      <div class="actions">
+        <button type="submit" class="btn-primary">
+          Enregistrer
+        </button>
+
+        <button type="button" class="btn-secondary" (click)="cancel()">
+          Annuler
+        </button>
+      </div>
+    </form>
+  </div>
+</section>

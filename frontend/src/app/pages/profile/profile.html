@@ -1,0 +1,34 @@
+<section class="profile-page">
+  <h1 class="page-title">Mon profil</h1>
+
+  <div class="profile-card">
+    <div class="profile-avatar">
+      <img [src]="user.profile_photo || 'assets/avatar-placeholder.png'" alt="Photo de profil" />
+    </div>
+
+    <div class="profile-info">
+      <h2>{{ user.full_name }}</h2>
+
+      <span class="role-badge">
+        {{ user.role }}
+      </span>
+
+      <p><strong>Email :</strong> {{ user.email }}</p>
+      <p><strong>Téléphone :</strong> {{ user.phone }}</p>
+      <p><strong>Localisation :</strong> {{ user.location || 'Non renseignée' }}</p>
+      <p><strong>Membre depuis :</strong> {{ user.created_at | date:'yyyy' }}</p>
+
+      <!-- ACTIONS -->
+      <div class="profile-actions">
+        <button class="btn-primary" routerLink="/profile-edit">
+          Modifier mon profil
+        </button>
+
+        <button class="btn-secondary" routerLink="/dashboard">
+          Retour
+        </button>
+      </div>
+
+    </div>
+  </div>
+</section>

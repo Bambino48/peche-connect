@@ -1,0 +1,38 @@
+<section class="actions-page">
+  <h1 class="page-title">Mes actions</h1>
+
+  <p class="subtitle">
+    Choisissez une action à effectuer sur votre compte
+  </p>
+
+  <div class="actions-grid">
+    <!-- PRODUITS -->
+    <div class="action-card" routerLink="/products" role="button">
+      <h3>Gérer mes produits</h3>
+      <p>Ajouter, modifier ou supprimer vos produits de pêche</p>
+    </div>
+
+    <!-- COMMANDES -->
+    <div class="action-card" routerLink="/orders" role="button">
+      <h3>Voir mes commandes</h3>
+      <p>Consulter l’historique et le statut de vos commandes</p>
+    </div>
+
+    <!-- STOCK (NOUVEAU) -->
+    <div class="action-card" routerLink="/stock" role="button">
+      <h3>Gestion du stock</h3>
+      <p>Suivre les quantités, prix et disponibilité de vos produits</p>
+    </div>
+
+    <!-- PROFIL -->
+    <div class="action-card" routerLink="/profile" role="button">
+      <h3>Gérer mon profil</h3>
+      <p>Mettre à jour vos informations personnelles</p>
+    </div>
+  </div>
+
+  <!-- Retour -->
+  <button class="btn-back" routerLink="/dashboard">
+    ← Retour
+  </button>
+</section>

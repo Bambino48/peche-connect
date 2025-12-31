@@ -1,0 +1,111 @@
+<section class="add-product-page">
+  <h1>Ajouter un produit</h1>
+  <p class="subtitle">
+    Renseignez les informations sur votre produit de pêche
+  </p>
+
+  <div class="form-card">
+    <form (ngSubmit)="submitProduct()">
+
+      <div class="form-group">
+        <label>Nom local</label>
+        <input type="text" [(ngModel)]="product.name_local" name="name_local" required />
+      </div>
+
+      <div class="form-group">
+        <label>Nom scientifique</label>
+        <input type="text" [(ngModel)]="product.name_scientific" name="name_scientific" />
+      </div>
+
+      <div class="form-group">
+        <label>Type de produit</label>
+        <select [(ngModel)]="product.fish_type" name="fish_type" required>
+          <option value="">-- Choisir --</option>
+          <option value="Poisson">Poisson</option>
+          <option value="Crustacé">Crustacé</option>
+          <option value="Mollusque">Mollusque</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Zone de pêche</label>
+        <input type="text" [(ngModel)]="product.fishing_zone" name="fishing_zone" />
+      </div>
+
+      <div class="form-group">
+        <label>Date de pêche</label>
+        <input type="date" [(ngModel)]="product.fishing_date" name="fishing_date" />
+      </div>
+
+      <div class="form-group">
+        <label>Taille moyenne (cm)</label>
+        <input type="number" [(ngModel)]="product.average_size" name="average_size" />
+      </div>
+
+      <div class="form-group">
+        <label>Qualité</label>
+        <select [(ngModel)]="product.quality_grade" name="quality_grade">
+          <option value="">-- Choisir --</option>
+          <option value="A">A</option>
+          <option value="B">B</option>
+          <option value="C">C</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Mode de conservation</label>
+        <select [(ngModel)]="product.conservation_method" name="conservation_method">
+          <option value="">-- Choisir --</option>
+          <option value="Frais">Frais</option>
+          <option value="Congelé">Congelé</option>
+          <option value="Séché">Séché</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Halal</label>
+        <select [(ngModel)]="product.halal" name="halal">
+          <option [ngValue]="true">Oui</option>
+          <option [ngValue]="false">Non</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Origine</label>
+        <select [(ngModel)]="product.origin_type" name="origin_type">
+          <option value="Sauvage">Sauvage</option>
+          <option value="Aquaculture">Aquaculture</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Saisonnalité</label>
+        <input type="text" [(ngModel)]="product.seasonality" name="seasonality" />
+      </div>
+
+      <div class="form-group">
+        <label>Certifications</label>
+        <input type="text" [(ngModel)]="product.certifications" name="certifications" />
+      </div>
+
+      <div class="form-group">
+        <label>État du produit</label>
+        <select [(ngModel)]="product.state" name="state">
+          <option value="Disponible">Disponible</option>
+          <option value="Indisponible">Indisponible</option>
+        </select>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn-primary">
+          Enregistrer
+        </button>
+
+        <button type="button" class="btn-secondary" (click)="goBack()">
+          ← Retour
+        </button>
+      </div>
+
+    </form>
+  </div>
+</section>

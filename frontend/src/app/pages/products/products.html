@@ -1,0 +1,76 @@
+<section class="products-page">
+
+  <!-- HEADER -->
+  <div class="page-header">
+    <div>
+      <h1>Mes produits</h1>
+      <p>Gérez vos produits de pêche (ajout, modification, suppression)</p>
+    </div>
+
+    <div class="page-actions">
+      <button class="btn-primary" routerLink="/products/add">
+        + Ajouter un produit
+      </button>
+
+      <button class="btn-secondary" routerLink="/actions">
+        ← Retour
+      </button>
+    </div>
+  </div>
+
+  <!-- GRID -->
+ <!-- GRID -->
+<div class="products-grid">
+
+  <!-- CARD -->
+  <div
+    class="product-card"
+    *ngFor="let product of products"
+  >
+
+    <div class="card-header">
+      <div>
+        <h3>{{ product.name_local }}</h3>
+        <span class="scientific">{{ product.name_scientific }}</span>
+      </div>
+
+      <span
+        class="status"
+        [ngClass]="{
+          'available': product.state === 'Disponible',
+          'unavailable': product.state === 'Indisponible'
+        }"
+      >
+        {{ product.state }}
+      </span>
+    </div>
+
+    <div class="card-body">
+      <div><strong>Type :</strong> {{ product.fish_type }}</div>
+      <div><strong>Zone :</strong> {{ product.fishing_zone }}</div>
+      <div><strong>Date :</strong> {{ product.fishing_date }}</div>
+      <div><strong>Taille :</strong> {{ product.average_size }} cm</div>
+      <div><strong>Qualité :</strong> {{ product.quality_grade }}</div>
+      <div><strong>Conservation :</strong> {{ product.conservation_method }}</div>
+      <div><strong>Halal :</strong> {{ product.halal }}</div>
+    </div>
+
+    <div class="card-actions">
+      <button
+        class="btn-edit"
+        [routerLink]="['/products/edit', product.id]"
+      >
+        Modifier
+      </button>
+
+      <button class="btn-delete">
+        Supprimer
+      </button>
+    </div>
+
+  </div>
+
+</div>
+
+</section>
+

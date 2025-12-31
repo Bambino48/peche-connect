@@ -1,0 +1,64 @@
+<section class="stock-edit-page">
+
+  <!-- HEADER -->
+  <div class="page-header">
+    <div>
+      <h1>Modifier le stock</h1>
+      <p class="subtitle">
+        Mettre à jour les informations de stock pour
+        <strong>{{ stock.product_name }}</strong>
+      </p>
+    </div>
+
+    <button class="btn-back" routerLink="/stock">
+      ← Retour
+    </button>
+  </div>
+
+  <!-- FORM -->
+  <div class="form-card">
+    <form (ngSubmit)="updateStock()">
+
+      <div class="form-grid">
+
+        <div class="form-group">
+          <label>Disponibilité</label>
+          <select [(ngModel)]="stock.availability_status" name="availability_status">
+            <option value="Disponible">Disponible</option>
+            <option value="Indisponible">Indisponible</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Stock disponible (kg)</label>
+          <input type="number" [(ngModel)]="stock.available_weight_kg" name="available_weight_kg" />
+        </div>
+
+        <div class="form-group">
+          <label>Minimum de commande (kg)</label>
+          <input type="number" [(ngModel)]="stock.minimum_order_kg" name="minimum_order_kg" />
+        </div>
+
+        <div class="form-group">
+          <label>Prix unitaire (FCFA / kg)</label>
+          <input type="number" [(ngModel)]="stock.unit_price" name="unit_price" />
+        </div>
+
+        <div class="form-group">
+          <label>Durée de fraîcheur (heures)</label>
+          <input type="number" [(ngModel)]="stock.freshness_duration_hours" name="freshness_duration_hours" />
+        </div>
+
+      </div>
+
+      <!-- ACTIONS -->
+      <div class="form-actions">
+        <button class="btn-primary" type="submit">
+          Mettre à jour
+        </button>
+      </div>
+
+    </form>
+  </div>
+
+</section>

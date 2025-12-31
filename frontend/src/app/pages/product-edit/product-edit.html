@@ -1,0 +1,139 @@
+<section class="product-form-page">
+  <h1>Modifier un produit</h1>
+  <p class="subtitle">
+    Modifiez les informations de votre produit de pêche
+  </p>
+
+  <div class="form-card">
+    <form (ngSubmit)="updateProduct()">
+
+      <div class="form-grid">
+
+        <!-- Nom local -->
+        <div class="form-group">
+          <label>Nom local</label>
+          <input
+            type="text"
+            [(ngModel)]="product.name_local"
+            name="name_local"
+            required
+          />
+        </div>
+
+        <!-- Nom scientifique -->
+        <div class="form-group">
+          <label>Nom scientifique</label>
+          <input
+            type="text"
+            [(ngModel)]="product.name_scientific"
+            name="name_scientific"
+          />
+        </div>
+
+        <!-- Type -->
+        <div class="form-group">
+          <label>Type de produit</label>
+          <select [(ngModel)]="product.fish_type" name="fish_type">
+            <option value="">-- Choisir --</option>
+            <option value="Poisson">Poisson</option>
+            <option value="Crustacé">Crustacé</option>
+            <option value="Mollusque">Mollusque</option>
+          </select>
+        </div>
+
+        <!-- Zone -->
+        <div class="form-group">
+          <label>Zone de pêche</label>
+          <input
+            type="text"
+            [(ngModel)]="product.fishing_zone"
+            name="fishing_zone"
+          />
+        </div>
+
+        <!-- Date -->
+        <div class="form-group">
+          <label>Date de pêche</label>
+          <input
+            type="date"
+            [(ngModel)]="product.fishing_date"
+            name="fishing_date"
+          />
+        </div>
+
+        <!-- Taille -->
+        <div class="form-group">
+          <label>Taille moyenne (cm)</label>
+          <input
+            type="number"
+            [(ngModel)]="product.average_size"
+            name="average_size"
+          />
+        </div>
+
+        <!-- Qualité -->
+        <div class="form-group">
+          <label>Qualité</label>
+          <select [(ngModel)]="product.quality_grade" name="quality_grade">
+            <option value="">-- Choisir --</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+          </select>
+        </div>
+
+        <!-- Conservation -->
+        <div class="form-group">
+          <label>Mode de conservation</label>
+          <select
+            [(ngModel)]="product.conservation_method"
+            name="conservation_method"
+          >
+            <option value="">-- Choisir --</option>
+            <option value="Frais">Frais</option>
+            <option value="Congelé">Congelé</option>
+            <option value="Séché">Séché</option>
+          </select>
+        </div>
+
+        <!-- Halal -->
+        <div class="form-group">
+          <label>Halal</label>
+          <select [(ngModel)]="product.halal" name="halal">
+            <option [value]="true">Oui</option>
+            <option [value]="false">Non</option>
+          </select>
+        </div>
+
+        <!-- État -->
+        <div class="form-group">
+          <label>État du produit</label>
+          <select [(ngModel)]="product.state" name="state">
+            <option value="Disponible">Disponible</option>
+            <option value="Indisponible">Indisponible</option>
+          </select>
+        </div>
+
+      </div>
+
+      <!-- ACTIONS -->
+      <div class="form-actions">
+        <button class="btn-primary" type="submit">
+          Mettre à jour
+        </button>
+
+        <button
+          class="btn-secondary"
+          type="button"
+          routerLink="/products"
+        >
+          ← Retour
+        </button>
+      </div>
+
+    </form>
+  </div>
+</section>
+
+
+

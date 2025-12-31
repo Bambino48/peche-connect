@@ -1,0 +1,57 @@
+<section class="stock-page">
+
+  <!-- HEADER -->
+  <div class="page-header">
+    <div>
+      <h1>Gestion du stock</h1>
+      <p>Suivez et mettez à jour votre stock de produits de pêche</p>
+    </div>
+
+    <button class="btn-back" routerLink="/actions">
+      ← Retour
+    </button>
+  </div>
+
+  <!-- TABLE -->
+  <div class="stock-card">
+    <table>
+      <thead>
+        <tr>
+          <th>Produit</th>
+          <th>Disponibilité</th>
+          <th>Stock (kg)</th>
+          <th>Minimum (kg)</th>
+          <th>Prix / kg</th>
+          <th>Fraîcheur (h)</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let stock of stocks">
+          <td>{{ stock.product_name }}</td>
+
+          <td>
+            <span class="status" [ngClass]="stock.availability_status">
+              {{ stock.availability_status }}
+            </span>
+          </td>
+
+          <td>{{ stock.available_weight_kg }}</td>
+          <td>{{ stock.minimum_order_kg }}</td>
+          <td>{{ stock.unit_price | number }} FCFA</td>
+          <td>{{ stock.freshness_duration_hours }} h</td>
+
+          <td>
+            <button
+              class="btn-edit"
+              [routerLink]="['/stock/edit', stock.id]">
+              Modifier
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</section>

@@ -1,0 +1,231 @@
+/* ===========================
+   PAGE
+=========================== */
+
+.order-detail-page {
+  padding: 48px 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* ===========================
+   HEADER
+=========================== */
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 32px;
+  gap: 24px;
+}
+
+.page-header h1 {
+  font-size: 32px;
+  color: var(--color-primary);
+  margin-bottom: 6px;
+}
+
+.subtitle {
+  color: var(--color-text-secondary);
+  font-size: 15px;
+}
+
+/* Bouton retour */
+
+.btn-back {
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 2px solid var(--color-primary);
+  background: transparent;
+  color: var(--color-primary);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-back:hover {
+  background: var(--color-primary);
+  color: white;
+}
+
+/* ===========================
+   SUMMARY
+=========================== */
+
+.order-summary {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin-bottom: 40px;
+}
+
+.summary-card {
+  background: var(--color-white);
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+}
+
+.summary-card h3 {
+  margin-bottom: 20px;
+  font-size: 20px;
+  color: var(--color-text-main);
+}
+
+/* Ligne clé / valeur */
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  font-size: 15px;
+}
+
+.summary-row span {
+  color: var(--color-text-secondary);
+}
+
+.summary-row strong {
+  color: var(--color-text-main);
+  font-weight: 600;
+}
+
+/* ===========================
+   STATUS
+=========================== */
+
+.status {
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.status.En\ attente {
+  background: #fff3e0;
+  color: #d97706;
+}
+
+.status.Confirmée {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+.status.Livrée {
+  background: #dcfce7;
+  color: #166534;
+}
+
+/* ===========================
+   ITEMS
+=========================== */
+
+.items-card {
+  background: var(--color-white);
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+  margin-bottom: 40px;
+}
+
+.items-card h3 {
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+/* TABLE */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead th {
+  text-align: left;
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+tbody td {
+  padding: 14px 0;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 15px;
+}
+
+.product-name {
+  font-weight: 600;
+}
+
+.subtotal {
+  font-weight: 700;
+}
+
+/* ===========================
+   ACTIONS
+=========================== */
+
+.order-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: flex-end;
+}
+
+/* Bouton principal */
+
+.btn-primary {
+  padding: 12px 24px;
+  border-radius: 999px;
+  border: none;
+  background: var(--color-primary);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  background: var(--color-primary-dark);
+  transform: translateY(-1px);
+}
+
+/* Bouton secondaire */
+
+.btn-secondary {
+  padding: 12px 24px;
+  border-radius: 999px;
+  border: 2px solid var(--color-primary);
+  background: transparent;
+  color: var(--color-primary);
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: var(--color-bg-light);
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media (max-width: 900px) {
+  .order-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .order-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

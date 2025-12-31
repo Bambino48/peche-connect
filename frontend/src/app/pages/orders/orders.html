@@ -1,0 +1,55 @@
+<section class="orders-page">
+
+  <!-- HEADER -->
+  <div class="page-header">
+    <div>
+      <h1>Commandes reçues</h1>
+      <p>Liste des commandes passées par vos clients</p>
+    </div>
+
+    <button class="btn-back" routerLink="/actions">
+      ← Retour
+    </button>
+  </div>
+
+  <!-- TABLE -->
+  <div class="orders-table">
+
+    <div class="table-header">
+      <span>#</span>
+      <span>Client</span>
+      <span>Date</span>
+      <span>Total</span>
+      <span>Statut</span>
+      <span>Action</span>
+    </div>
+
+    <div
+      class="table-row"
+      *ngFor="let order of orders"
+    >
+      <span>#{{ order.id }}</span>
+      <span>{{ order.client_name }}</span>
+      <span>{{ order.created_at }}</span>
+      <span>{{ order.total_price | number }} FCFA</span>
+
+      <span
+        class="status"
+        [ngClass]="order.order_status
+          .toLowerCase()
+          .replace(' ', '-')"
+      >
+        {{ order.order_status }}
+      </span>
+
+      <button
+        class="btn-view"
+        [routerLink]="['/orders', order.id]"
+      >
+        Voir
+      </button>
+    </div>
+
+  </div>
+
+</section>
