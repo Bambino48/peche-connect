@@ -1,0 +1,51 @@
+<section class="checkout-page">
+
+  <!-- HEADER -->
+  <div class="page-header">
+    <h1>Validation de la commande</h1>
+
+    <a routerLink="/cart" class="btn-outline">
+      Retour au panier
+    </a>
+  </div>
+
+  <!-- CONTENU -->
+  <div class="checkout-layout">
+
+    <!-- ADRESSE -->
+    <div class="checkout-card">
+      <h3>Adresse de livraison</h3>
+
+      <textarea
+        placeholder="Ex : Abidjan – Cocody, Rue des pêcheurs"
+        [(ngModel)]="deliveryAddress"
+        rows="4"
+      ></textarea>
+    </div>
+
+    <!-- RÉCAP PANIER -->
+    <div class="checkout-card">
+      <h3>Récapitulatif</h3>
+
+      <div class="summary-item" *ngFor="let item of items">
+        <span>
+          {{ item.name }} (x{{ item.quantity }})
+        </span>
+        <strong>
+          {{ item.price * item.quantity | number }} FCFA
+        </strong>
+      </div>
+
+      <div class="summary-total">
+        Total :
+        <strong>{{ total | number }} FCFA</strong>
+      </div>
+
+      <button class="btn-primary" (click)="confirmOrder()">
+        Confirmer la commande
+      </button>
+    </div>
+
+  </div>
+
+</section>

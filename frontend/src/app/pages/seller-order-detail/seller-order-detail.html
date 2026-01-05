@@ -2,13 +2,16 @@
 
   <!-- HEADER -->
   <div class="page-header">
-    <div>
+    <div class="header-left">
       <h1>Détail de la commande #{{ order.id }}</h1>
-      <p class="subtitle">Commande passée le {{ order.created_at }}</p>
+      <p class="subtitle">
+        Commande passée le
+        <strong>{{ order.created_at }}</strong>
+      </p>
     </div>
 
-    <button class="btn-back" routerLink="/orders">
-      ← Retour
+    <button class="btn-back" routerLink="/payments/{{ order.id }}">
+      Retour
     </button>
   </div>
 
@@ -33,7 +36,9 @@
 
       <div class="summary-row">
         <span>Total</span>
-        <strong>{{ order.total_price | number }} FCFA</strong>
+        <strong class="amount">
+          {{ order.total_price | number }} FCFA
+        </strong>
       </div>
 
       <div class="summary-row">
@@ -87,6 +92,35 @@
         </tr>
       </tbody>
     </table>
+  </div>
+
+  <!-- PAIEMENT -->
+  <div class="summary-card payment-card">
+    <h3>Paiement</h3>
+
+    <div class="summary-row">
+      <span>Statut</span>
+      <strong>{{ order.payment_status || '—' }}</strong>
+    </div>
+
+    <div class="summary-row">
+      <span>Montant</span>
+      <strong class="amount">
+        {{ order.total_price | number }} FCFA
+      </strong>
+    </div>
+
+    <a
+      *ngIf="order.payment_id"
+      class="link"
+      [routerLink]="['/payments', order.payment_id]"
+    >
+      Voir le paiement
+    </a>
+
+    <span *ngIf="!order.payment_id" class="muted">
+      Paiement non disponible
+    </span>
   </div>
 
   <!-- ACTIONS -->

@@ -1,0 +1,68 @@
+<section class="shop-page">
+
+  <!-- HEADER -->
+  <div class="page-header">
+    <h1>Catalogue des produits</h1>
+    <p class="subtitle">
+      Achetez du poisson frais directement auprès des pêcheurs
+    </p>
+  </div>
+
+  <!-- GRID -->
+  <div class="products-grid">
+
+    <div
+      class="product-card"
+      *ngFor="let product of products"
+      [class.disabled]="product.availability_status !== 'Disponible'"
+    >
+
+      <div class="card-header">
+        <h3>{{ product.name_local }}</h3>
+        <span class="scientific">{{ product.name_scientific }}</span>
+      </div>
+
+      <div class="card-body">
+        <div>
+          <strong>Prix :</strong>
+          {{ product.price | number }} FCFA / {{ product.unit }}
+        </div>
+
+        <div>
+          <strong>Stock :</strong>
+          {{ product.available_weight_kg }} kg
+        </div>
+
+        <div>
+          <strong>Fraîcheur :</strong>
+          {{ product.freshness }} h
+        </div>
+
+        <div>
+          <strong>Vendeur :</strong>
+          {{ product.seller }}
+        </div>
+      </div>
+
+      <div class="card-footer">
+        <span
+          class="status"
+          [ngClass]="product.availability_status"
+        >
+          {{ product.availability_status }}
+        </span>
+
+        <button
+          class="btn-primary"
+          [routerLink]="['/shop/product', product.id]"
+          [disabled]="product.availability_status !== 'Disponible'"
+        >
+          Voir le produit
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>

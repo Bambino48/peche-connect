@@ -1,0 +1,62 @@
+<section class="deliveries-page">
+
+  <!-- HEADER -->
+  <div class="page-header">
+    <div>
+      <h1>Livraisons</h1>
+      <p class="subtitle">
+        Suivi des livraisons associées à vos commandes
+      </p>
+    </div>
+
+    <button class="btn-back" routerLink="/actions">
+      Retour
+    </button>
+  </div>
+
+  <!-- TABLE -->
+  <div class="table-card">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Livreur</th>
+          <th>Date / Heure</th>
+          <th>Commande</th>
+          <th>Statut</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let delivery of deliveries">
+          <td>#{{ delivery.id }}</td>
+          <td>{{ delivery.delivery_person }}</td>
+          <td>{{ delivery.delivery_time }}</td>
+          <td>
+            <a
+              class="link"
+              [routerLink]="['/orders', delivery.order_id]"
+            >
+              Commande #{{ delivery.order_id }}
+            </a>
+          </td>
+          <td>
+            <span
+              class="status"
+              [ngClass]="getStatusClass(delivery.delivery_status)"
+            >
+              {{ delivery.delivery_status }}
+            </span>
+          </td>
+          <td>
+            <button class="btn-view" [routerLink]="['/deliveries', delivery.id]">
+              Voir
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</section>

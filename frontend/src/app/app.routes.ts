@@ -14,6 +14,20 @@ import { OrdersComponent } from './pages/orders/orders';
 import { SellerOrderDetailComponent } from './pages/seller-order-detail/seller-order-detail';
 import { StockComponent } from './pages/stock/stock';
 import { StockEditComponent } from './pages/stock-edit/stock-edit';
+import { PaymentsComponent } from './pages/payments/payments';
+import { PaymentsDetailComponent } from './pages/payments-detail/payments-detail';
+import { DeliveriesComponent } from './pages/deliveries/deliveries';
+import { DeliveryDetailComponent } from './pages/delivery-detail/delivery-detail';
+import { DeliverySettingsComponent } from './pages/delivery-settings/delivery-settings';
+import { ShopComponent } from './pages/shop/shop';
+import { ShopProductComponent } from './pages/shop-product/shop-product';
+import { ShopProductDetailComponent } from './pages/shop-product-detail/shop-product-detail';
+import { CartComponent } from './pages/cart/cart';
+import { CheckoutComponent } from './pages/checkout/checkout';
+import { MesCommandesComponent } from './pages/mes-commandes/mes-commandes';
+import { BuyerOrderDetailComponent } from './pages/buyer-order-detail/buyer-order-detail';
+import { BuyerDeliveryDetailComponent } from './pages/buyer-delivery-detail/buyer-delivery-detail';
+import { BuyerDashboardComponent } from './pages/buyer-dashboard/buyer-dashboard';
 
 export const routes: Routes = [
   {
@@ -71,6 +85,62 @@ export const routes: Routes = [
   {
     path: 'stock/edit/:id',
     component: StockEditComponent,
+  },
+  {
+    path: 'payments',
+    component: PaymentsComponent,
+  },
+  {
+    path: 'payments/:id',
+    component: PaymentsDetailComponent,
+  },
+  {
+    path: 'deliveries',
+    component: DeliveriesComponent,
+  },
+  {
+    path: 'deliveries/:id',
+    component: DeliveryDetailComponent,
+  },
+  {
+    path: 'delivery/settings',
+    component: DeliverySettingsComponent,
+  },
+  {
+    path: 'buyer-dashboard',
+    component: BuyerDashboardComponent,
+  },
+  {
+    path: 'shop',
+    component: ShopComponent,
+  },
+  {
+    path: 'shop/:id',
+    component: ShopProductComponent,
+  },
+  {
+    path: 'shop/product/:id',
+    component: ShopProductDetailComponent,
+  },
+  {
+    path: 'cart',
+    component: CartComponent,
+  },
+  {
+    path: 'checkout',
+    component: CheckoutComponent,
+  },
+  {
+    path: 'my-orders',
+    component: MesCommandesComponent,
+  },
+  {
+    path: 'my-orders/:id',
+    component: BuyerOrderDetailComponent,
+  },
+  {
+    path: 'delivery/:orderId',
+    component: BuyerDeliveryDetailComponent,
   },
   {
     path: '**',

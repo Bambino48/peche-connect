@@ -1,0 +1,56 @@
+<section class="product-detail-page">
+
+  <!-- HEADER -->
+  <div class="page-header">
+    <div>
+      <h1>{{ product.name_local }}</h1>
+      <p class="scientific">{{ product.name_scientific }}</p>
+    </div>
+
+    <button class="btn-back" routerLink="/shop">
+      ← Retour au catalogue
+    </button>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="product-layout">
+
+    <!-- INFOS -->
+    <div class="product-info">
+      <h3>Informations du produit</h3>
+
+      <div class="info-row"><span>Type</span><strong>{{ product.fish_type }}</strong></div>
+      <div class="info-row"><span>Origine</span><strong>{{ product.origin_type }}</strong></div>
+      <div class="info-row"><span>Zone de pêche</span><strong>{{ product.fishing_zone }}</strong></div>
+      <div class="info-row"><span>Date de pêche</span><strong>{{ product.fishing_date }}</strong></div>
+      <div class="info-row"><span>Taille moyenne</span><strong>{{ product.average_size }} cm</strong></div>
+      <div class="info-row"><span>Qualité</span><strong>{{ product.quality_grade }}</strong></div>
+      <div class="info-row"><span>Conservation</span><strong>{{ product.conservation_method }}</strong></div>
+      <div class="info-row"><span>Halal</span><strong>{{ product.halal ? 'Oui' : 'Non' }}</strong></div>
+      <div class="info-row"><span>Fraîcheur</span><strong>{{ product.freshness_duration_hours }} h</strong></div>
+    </div>
+
+    <!-- ACHAT -->
+    <div class="purchase-card">
+      <h3>Achat</h3>
+
+      <div class="price">
+        {{ product.unit_price | number }} FCFA / kg
+      </div>
+
+      <div class="stock">
+        Stock disponible : <strong>{{ product.available_weight_kg }} kg</strong>
+      </div>
+
+      <div class="seller">
+        Vendu par <strong>{{ product.seller }}</strong>
+      </div>
+
+      <button class="btn-primary">
+        Ajouter au panier
+      </button>
+    </div>
+
+  </div>
+
+</section>

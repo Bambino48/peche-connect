@@ -1,0 +1,40 @@
+<section class="delivery-detail-page">
+
+  <div class="page-header">
+    <h1>Livraison #{{ delivery.id }}</h1>
+
+    <button class="btn-back" routerLink="/delivery-settings">
+      Retour
+    </button>
+  </div>
+
+  <div class="detail-card">
+    <div class="row">
+      <span>Livreur</span>
+      <strong>{{ delivery.delivery_person }}</strong>
+    </div>
+
+    <div class="row">
+      <span>Statut</span>
+      <span class="status" [ngClass]="delivery.delivery_status">
+        {{ getStatusLabel(delivery.delivery_status) }}
+      </span>
+    </div>
+
+    <div class="row">
+      <span>Heure prévue</span>
+      <strong>{{ delivery.delivery_time }}</strong>
+    </div>
+
+    <div class="row">
+      <span>Commande</span>
+      <a
+        class="link"
+        [routerLink]="['/orders', delivery.order_id]"
+      >
+        Voir la commande #{{ delivery.order_id }}
+      </a>
+    </div>
+  </div>
+
+</section>

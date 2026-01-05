@@ -2,30 +2,107 @@
   <h1>Tableau de bord</h1>
   <p>Bienvenue sur votre espace personnel Pêche Connect.</p>
 
+  <!-- INFOS UTILISATEUR -->
+  <div class="dashboard-user-info">
+    <p class="user-name">👋 Bonjour, Ibrahim</p>
+    <p class="user-meta">
+      Rôle : Acheteur • Dernière connexion : 31 décembre 2025
+    </p>
+  </div>
+
+  <!-- ALERTE -->
+  <div class="dashboard-alert">
+    ⚠️ Votre profil n’est pas encore totalement complété.
+  </div>
+
+  <!-- STATISTIQUES -->
+  <div class="dashboard-stats">
+    <div class="stat">
+      <strong>3</strong>
+      <span>Commandes en cours</span>
+    </div>
+
+    <div class="stat">
+      <strong>1</strong>
+      <span>Livraison en attente</span>
+    </div>
+
+    <div class="stat">
+      <strong>0</strong>
+      <span>Messages non lus</span>
+    </div>
+  </div>
+
   <div class="dashboard-cards">
     <!-- PROFIL -->
     <div class="dashboard-card">
-      <h2>Mon profil</h2>
+      <div class="card-header">
+        <svg
+          class="card-icon"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8V22h19.2v-2.8c0-3.2-6.4-4.8-9.6-4.8z"
+          />
+        </svg>
+
+        <h2>Mon profil</h2>
+      </div>
+
       <p>Consulter et modifier mes informations personnelles</p>
 
-      <button
-        class="btn-primary"
-        routerLink="/profile"
-      >
+      <button class="btn-primary" routerLink="/profile">
         Voir mon profil
       </button>
     </div>
 
     <!-- ACTIONS -->
     <div class="dashboard-card">
-      <h2>Mes actions</h2>
-      <p>Accéder aux fonctionnalités disponibles</p>
+      <div class="card-header">
+        <svg
+          class="card-icon"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zm0-10v2h14V7H7z"
+          />
+        </svg>
 
-      <button
-        class="btn-secondary"
-        routerLink="/actions"
-      >
+        <h2>Mes actions</h2>
+      </div>
+
+      <p>Gérer vos commandes, livraisons et paiements</p>
+
+      <button class="btn-secondary" routerLink="/actions">
         Mes actions
+      </button>
+    </div>
+
+    <!-- ACTIVITÉ RÉCENTE -->
+    <div class="dashboard-card">
+      <div class="card-header">
+        <svg
+          class="card-icon"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            d="M13 3a9 9 0 1 0 8.95 10h-2.02A7 7 0 1 1 13 5v4l5-5-5-5v4z"
+          />
+        </svg>
+
+        <h2>Activité récente</h2>
+      </div>
+
+      <p>Dernière commande passée le 30/12/2025.</p>
+
+      <button class="btn-secondary">
+        Voir l’historique
       </button>
     </div>
   </div>

@@ -1,0 +1,80 @@
+<section class="payments-page">
+
+  <!-- HEADER -->
+  <div class="page-header">
+    <div>
+      <h1>Paiements reçus</h1>
+      <p class="subtitle">
+        Historique des paiements effectués par vos clients
+      </p>
+    </div>
+
+    <button class="btn-back" routerLink="/actions">
+      Retour
+    </button>
+  </div>
+
+  <!-- TABLE CARD -->
+  <div class="payments-card">
+
+    <table class="payments-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Date</th>
+          <th>Méthode</th>
+          <th>Référence</th>
+          <th>Commande</th>
+          <th>Statut</th>
+          <th>Reçu</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let payment of payments">
+          <td>#{{ payment.id }}</td>
+
+          <td>{{ payment.paid_at }}</td>
+
+          <td>
+            <span class="method">
+              {{ payment.payment_method }}
+            </span>
+          </td>
+
+          <td class="reference">
+            {{ payment.transaction_reference }}
+          </td>
+
+          <td>
+            <a class="order-link" [routerLink]="['/orders', payment.order_id]">
+              Commande #{{ payment.order_id }}
+            </a>
+          </td>
+
+          <td>
+            <span class="status" [ngClass]="{
+                paid: payment.payment_status === 'Payé',
+                pending: payment.payment_status === 'En attente',
+                failed: payment.payment_status === 'Échoué'
+              }">
+              {{ payment.payment_status }}
+            </span>
+          </td>
+
+          <td>
+            <button class="btn-receipt" [routerLink]="['/payments', payment.id]">
+              Voir
+            </button>
+
+            <span *ngIf="!payment.receipt_url" class="no-receipt">
+              —
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+</section>

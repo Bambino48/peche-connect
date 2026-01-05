@@ -1,0 +1,73 @@
+<section class="cart-page">
+
+  <!-- HEADER -->
+  <div class="page-header">
+    <h1>Mon panier</h1>
+
+    <a routerLink="/shop" class="btn-outline">
+      Continuer mes achats
+    </a>
+  </div>
+
+  <!-- PANIER VIDE -->
+  <div *ngIf="items.length === 0" class="empty-cart">
+    <p>Votre panier est vide</p>
+    <a routerLink="/shop" class="btn-primary">
+      Voir le catalogue
+    </a>
+  </div>
+
+  <!-- LISTE PANIER -->
+  <div *ngIf="items.length > 0">
+
+    <div class="cart-item" *ngFor="let item of items">
+      <div class="item-info">
+        <h3>{{ item.name }}</h3>
+        <span class="unit-price">
+          {{ item.price | number }} FCFA / kg
+        </span>
+      </div>
+
+      <div class="item-quantity">
+        <input
+          type="number"
+          min="1"
+          [value]="item.quantity"
+          (change)="updateQuantity(item, $any($event.target).value)"
+        />
+      </div>
+
+      <div class="item-subtotal">
+        {{ item.price * item.quantity | number }} FCFA
+      </div>
+
+      <button
+        class="btn-remove"
+        title="Supprimer"
+        (click)="removeItem(item.productId)"
+      >
+        ✕
+      </button>
+    </div>
+
+    <!-- RÉCAPITULATIF -->
+    <div class="cart-summary">
+      <div class="total">
+        Total :
+        <strong>{{ total | number }} FCFA</strong>
+      </div>
+
+      <div class="actions">
+        <button class="btn-secondary" (click)="clearCart()">
+          Vider le panier
+        </button>
+
+        <button class="btn-primary" routerLink="/checkout">
+          Passer la commande
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+</section>

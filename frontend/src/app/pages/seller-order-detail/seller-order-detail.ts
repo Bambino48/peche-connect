@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   standalone: true,
@@ -19,28 +20,37 @@ export class SellerOrderDetailComponent implements OnInit {
     order_status: 'En attente',
     total_price: 18500,
     delivery_address: 'Abidjan – Cocody',
+
+    payment_id: 1,
+    payment_status: 'Payé',
+
     client: {
       full_name: 'Jean Dupont',
       phone: '0700000000',
-      email: 'jean@email.com'
+      email: 'jean@email.com',
     },
+
     items: [
       {
         product_name: 'Thon rouge',
         quantity_kg: 2,
         unit_price: 2500,
-        subtotal: 5000
+        subtotal: 5000,
       },
       {
         product_name: 'Sardine',
         quantity_kg: 5,
         unit_price: 2700,
-        subtotal: 13500
-      }
-    ]
+        subtotal: 13500,
+      },
+    ],
   };
 
-  constructor(private route: ActivatedRoute) {}
+  /** ✅ UN SEUL CONSTRUCTEUR */
+  constructor(
+    private route: ActivatedRoute,
+    private cart: CartService
+  ) {}
 
   ngOnInit(): void {
     this.orderId = Number(this.route.snapshot.paramMap.get('id'));
@@ -52,5 +62,15 @@ export class SellerOrderDetailComponent implements OnInit {
 
   markAsDelivered() {
     this.order.order_status = 'Livrée';
+  }
+
+  /** ✅ Ajout panier fonctionnel */
+  addToCart() {
+    this.cart.addItem({
+      productId: 1,
+      name: 'Thon rouge',
+      price: 2500,
+      quantity: 1,
+    });
   }
 }

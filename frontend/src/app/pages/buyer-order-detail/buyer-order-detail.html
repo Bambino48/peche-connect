@@ -1,0 +1,79 @@
+<section class="order-detail-page">
+
+  <!-- HEADER -->
+  <div class="page-header">
+    <div>
+      <h1>Commande #{{ order.id }}</h1>
+      <p class="subtitle">
+        Passée le {{ order.created_at }}
+      </p>
+    </div>
+
+    <button class="btn-back" routerLink="/my-orders">
+      Retour
+    </button>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="order-summary">
+
+    <!-- COMMANDE -->
+    <div class="summary-card">
+      <h3>Commande</h3>
+
+      <div class="summary-row">
+        <span>Statut</span>
+        <strong>{{ order.status }}</strong>
+      </div>
+
+      <div class="summary-row">
+        <span>Adresse de livraison</span>
+        <strong>{{ order.delivery_address }}</strong>
+      </div>
+    </div>
+
+    <!-- PAIEMENT -->
+    <div class="summary-card">
+      <h3>Paiement</h3>
+
+      <div class="summary-row">
+        <span>Statut</span>
+        <strong>{{ order.payment_status }}</strong>
+      </div>
+
+      <div class="summary-row">
+        <span>Total</span>
+        <strong>{{ order.total | number }} FCFA</strong>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- PRODUITS -->
+  <div class="items-card">
+    <h3>Produits commandés</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Produit</th>
+          <th>Quantité</th>
+          <th>Prix</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let item of order.items">
+          <td>{{ item.name }}</td>
+          <td>{{ item.quantity }}</td>
+          <td>{{ item.price | number }} FCFA</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <a class="link" [routerLink]="['/delivery', order.id]">
+    Suivre la livraison
+  </a>
+
+
+</section>

@@ -1,0 +1,55 @@
+<section class="product-detail-page">
+
+  <!-- HEADER -->
+  <div class="page-header">
+    <div>
+      <h1>{{ product.name }}</h1>
+      <p class="scientific">{{ product.scientific_name }}</p>
+    </div>
+
+    <button class="btn-back" routerLink="/shop">
+      Retour au catalogue
+    </button>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="product-layout">
+
+    <!-- INFO CARD -->
+    <div class="product-card">
+
+      <div class="price">
+        {{ product.price | number }} FCFA
+        <span>/ kg</span>
+      </div>
+
+      <div class="meta">
+        <p><strong>Stock :</strong> {{ product.stock }} kg</p>
+        <p><strong>Fraîcheur :</strong> {{ product.freshness }} h</p>
+        <p><strong>Vendeur :</strong> {{ product.seller }}</p>
+      </div>
+
+      <p class="description">
+        {{ product.description }}
+      </p>
+
+      <div class="actions">
+        <span class="status" [class.available]="product.available" [class.unavailable]="!product.available">
+          {{ product.available ? 'Disponible' : 'Indisponible' }}
+        </span>
+
+        <button class="btn-primary" (click)="addToCart()" [disabled]="!product.available">
+          Ajouter au panier
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- 🔔 TOAST -->
+  <div class="toast" *ngIf="showToast">
+    ✔ {{ product.name }} ajouté au panier
+  </div>
+
+</section>

@@ -1,0 +1,80 @@
+<section class="delivery-settings-page">
+
+  <div class="page-header">
+    <h1>Livraison & emballage</h1>
+    <p class="subtitle">
+      Configurez vos paramètres de livraison et suivez les livraisons
+    </p>
+  </div>
+
+  <!-- PARAMÈTRES LIVRAISON -->
+  <div class="settings-card">
+    <h2>Paramètres de livraison</h2>
+
+    <form (ngSubmit)="savePackaging()">
+      <div class="form-grid">
+
+        <div class="form-group">
+          <label>Type d’emballage</label>
+          <input [(ngModel)]="packaging.packaging_type" name="packaging_type" />
+        </div>
+
+        <div class="form-group">
+          <label>Zone de livraison</label>
+          <input [(ngModel)]="packaging.delivery_zone" name="delivery_zone" />
+        </div>
+
+        <div class="form-group">
+          <label>Frais de livraison (FCFA)</label>
+          <input type="number" [(ngModel)]="packaging.delivery_fee" name="delivery_fee" />
+        </div>
+
+        <div class="form-group">
+          <label>Délai de livraison</label>
+          <input [(ngModel)]="packaging.delivery_delay" name="delivery_delay" />
+        </div>
+
+        <div class="form-group full">
+          <label>Politique de retard</label>
+          <textarea [(ngModel)]="packaging.delay_policy" name="delay_policy"></textarea>
+        </div>
+
+        <div class="form-group checkbox">
+          <input type="checkbox" [(ngModel)]="packaging.pickup_available" name="pickup_available" />
+          <label>Retrait sur place disponible</label>
+        </div>
+
+      </div>
+
+      <button class="btn-primary" type="submit">
+        Enregistrer
+      </button>
+    </form>
+  </div>
+
+  <!-- LIVRAISONS -->
+  <div class="deliveries-card">
+    <h2>Livraisons en cours</h2>
+
+    <div class="delivery-list">
+      <div class="delivery-row" *ngFor="let d of deliveries">
+        <div>
+          <strong>Commande #{{ d.order_id }}</strong>
+          <p>Livreur : {{ d.delivery_person }}</p>
+        </div>
+
+        <span class="status" [ngClass]="d.delivery_status">
+          {{ getStatusLabel(d.delivery_status) }}
+        </span>
+
+        <button
+          class="btn-view"
+          [routerLink]="['/deliveries', d.id]"
+        >
+          Voir
+        </button>
+      </div>
+    </div>
+  </div>
+
+</section>

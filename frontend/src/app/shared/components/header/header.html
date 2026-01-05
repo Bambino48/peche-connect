@@ -1,26 +1,144 @@
 <header class="header">
+  <!-- LOGO -->
   <div class="logo">
-    <ng-icon name="heroShoppingCart"></ng-icon>
+    <!-- Icône panier (logo) -->
+    <svg
+  width="26"
+  height="26"
+  viewBox="0 0 64 64"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  class="icon"
+>
+  <!-- Vague circulaire -->
+  <path
+    d="M32 6C17.6 6 6 17.6 6 32s11.6 26 26 26 26-11.6 26-26"
+    stroke="currentColor"
+    stroke-width="3"
+    stroke-linecap="round"
+  />
+
+  <!-- Corps du poisson -->
+  <path
+    d="M18 32c6-7 14-10 22-10s16 3 22 10c-6 7-14 10-22 10s-16-3-22-10z"
+    stroke="currentColor"
+    stroke-width="3"
+    stroke-linejoin="round"
+  />
+
+  <!-- Queue stylisée -->
+  <path
+    d="M18 32l-6-6m6 6l-6 6"
+    stroke="currentColor"
+    stroke-width="3"
+    stroke-linecap="round"
+  />
+
+  <!-- Œil -->
+  <circle
+    cx="40"
+    cy="30"
+    r="2"
+    fill="currentColor"
+  />
+</svg>
+
+
+
     <span>Pêche Connect</span>
   </div>
 
-  <!-- Bouton burger (mobile) -->
+  <!-- BOUTON BURGER (mobile) -->
   <button class="burger" (click)="toggleMenu()">
-    <ng-icon name="heroBars3"></ng-icon>
+    <!-- Icône burger -->
+    <svg
+      width="28"
+      height="28"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M4 6h16M4 12h16M4 18h16"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+      />
+    </svg>
   </button>
 
+  <!-- NAV -->
   <nav class="nav" [class.open]="menuOpen">
     <a routerLink="/" (click)="closeMenu()">
       Accueil
     </a>
 
     <a routerLink="/login" (click)="closeMenu()">
-      <ng-icon name="heroArrowRightOnRectangle"></ng-icon>
+      <!-- Icône connexion -->
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        class="icon"
+      >
+        <path
+          d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M10 17l5-5-5-5"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M15 12H3"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
       Connexion
     </a>
 
     <a routerLink="/register" class="btn" (click)="closeMenu()">
-      <ng-icon name="heroUserPlus"></ng-icon>
+      <!-- Icône inscription -->
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        class="icon"
+      >
+        <path
+          d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <circle
+          cx="12"
+          cy="7"
+          r="4"
+          stroke="currentColor"
+          stroke-width="2"
+        />
+        <path
+          d="M16 11v6M13 14h6"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+        />
+      </svg>
       Inscription
     </a>
   </nav>

@@ -1,0 +1,80 @@
+<section class="delivery-detail-page">
+
+  <!-- HEADER -->
+  <div class="page-header">
+    <div>
+      <h1>Suivi de la livraison</h1>
+      <p class="subtitle">
+        Commande #{{ delivery.order_id }}
+      </p>
+    </div>
+
+    <button class="btn-back" routerLink="/my-orders/{{ delivery.order_id }}">
+      Retour
+    </button>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="delivery-summary">
+
+    <!-- LIVRAISON -->
+    <div class="summary-card">
+      <h3>Livraison</h3>
+
+      <div class="summary-row">
+        <span>Statut</span>
+        <span
+          class="status"
+          [ngClass]="getStatusClass(delivery.delivery_status)"
+        >
+          {{ delivery.delivery_status }}
+        </span>
+      </div>
+
+      <div class="summary-row">
+        <span>Livreur</span>
+        <strong>{{ delivery.delivery_person }}</strong>
+      </div>
+
+      <div class="summary-row">
+        <span>Heure estimée</span>
+        <strong>{{ delivery.delivery_time }}</strong>
+      </div>
+    </div>
+
+    <!-- TIMELINE -->
+    <div class="summary-card">
+      <h3>Avancement</h3>
+
+      <ul class="timeline">
+        <li class="done">
+          <span class="dot"></span>
+          Commande confirmée
+        </li>
+
+        <li
+          [class.done]="delivery.delivery_status !== 'En préparation'"
+        >
+          <span class="dot"></span>
+          Préparation
+        </li>
+
+        <li
+          [class.done]="delivery.delivery_status === 'En route' || delivery.delivery_status === 'Livrée'"
+        >
+          <span class="dot"></span>
+          En route
+        </li>
+
+        <li
+          [class.done]="delivery.delivery_status === 'Livrée'"
+        >
+          <span class="dot"></span>
+          Livrée
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+</section>
