@@ -15,7 +15,6 @@ export class CheckoutComponent implements OnInit {
 
   items: CartItem[] = [];
   total = 0;
-
   deliveryAddress = '';
 
   constructor(
@@ -38,13 +37,13 @@ export class CheckoutComponent implements OnInit {
       return;
     }
 
-    console.log('COMMANDE VALIDÉE', {
-      items: this.items,
-      total: this.total,
-      address: this.deliveryAddress,
-    });
+    /** 🔹 MOCK création commande */
+    const orderId = Math.floor(Math.random() * 1000) + 1;
 
+    /** 🔹 Vider le panier */
     this.cart.clear();
-    this.router.navigate(['/orders']);
+
+    /** 🔹 Redirection vers confirmation */
+    this.router.navigate(['/buyer-order-success', orderId]);
   }
 }

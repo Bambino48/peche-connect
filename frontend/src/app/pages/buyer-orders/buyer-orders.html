@@ -1,0 +1,114 @@
+<section class="buyer-orders-page">
+
+  <!-- HEADER -->
+  <div class="page-header">
+    <div class="title-block">
+      <h1>Mes commandes</h1>
+      <p class="subtitle">
+        Consultez l’historique et le suivi de vos commandes
+      </p>
+    </div>
+
+    <a routerLink="/shop" class="btn-outline">
+      Continuer mes achats
+    </a>
+  </div>
+
+  <!-- LISTE COMMANDES -->
+  <div class="orders-list">
+
+    <div class="order-card" *ngFor="let order of orders">
+
+      <!-- GAUCHE -->
+      <div class="order-main">
+
+        <div class="order-title">
+          <!-- 📦 ICON COMMANDE -->
+          <svg viewBox="0 0 24 24" class="icon">
+            <path d="M3 7l9 5 9-5-9-5-9 5zm0 5l9 5 9-5m-9 5v6"
+              stroke="currentColor"
+              stroke-width="2"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"/>
+          </svg>
+
+          <h3>Commande #{{ order.id }}</h3>
+        </div>
+
+        <p class="date">
+          Passée le {{ order.created_at }}
+        </p>
+
+        <!-- STATUT -->
+        <span
+          class="status"
+          [ngClass]="getStatusClass(order.status)"
+        >
+          {{ order.status }}
+        </span>
+      </div>
+
+      <!-- DROITE -->
+      <div class="order-meta">
+
+        <!-- 💰 PRIX -->
+        <div class="price">
+          <svg viewBox="0 0 24 24" class="icon small">
+            <path d="M12 1v22M17 5H9a3 3 0 000 6h6a3 3 0 010 6H6"
+              stroke="currentColor"
+              stroke-width="2"
+              fill="none"
+              stroke-linecap="round"/>
+          </svg>
+
+          <strong>{{ order.total | number }} FCFA</strong>
+        </div>
+
+        <div class="actions">
+
+          <!-- 👁 VOIR -->
+          <a
+            class="link"
+            [routerLink]="['/orders', order.id]"
+          >
+            <svg viewBox="0 0 24 24" class="icon small">
+              <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"
+                stroke="currentColor"
+                stroke-width="2"
+                fill="none"/>
+              <circle cx="12" cy="12" r="3"
+                stroke="currentColor"
+                stroke-width="2"
+                fill="none"/>
+            </svg>
+            Voir la commande
+          </a>
+
+          <!-- 🚚 LIVRAISON -->
+          <a
+            *ngIf="order.status !== 'Annulée'"
+            class="link secondary"
+            [routerLink]="['/delivery', order.id]"
+          >
+            <svg viewBox="0 0 24 24" class="icon small">
+              <path d="M3 7h13v10H3zM16 10h4l1 3v4h-5"
+                stroke="currentColor"
+                stroke-width="2"
+                fill="none"
+                stroke-linejoin="round"/>
+              <circle cx="7" cy="19" r="1.5"/>
+              <circle cx="17" cy="19" r="1.5"/>
+            </svg>
+            Suivre la livraison
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>

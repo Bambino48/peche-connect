@@ -28,6 +28,15 @@ import { MesCommandesComponent } from './pages/mes-commandes/mes-commandes';
 import { BuyerOrderDetailComponent } from './pages/buyer-order-detail/buyer-order-detail';
 import { BuyerDeliveryDetailComponent } from './pages/buyer-delivery-detail/buyer-delivery-detail';
 import { BuyerDashboardComponent } from './pages/buyer-dashboard/buyer-dashboard';
+import { BuyerOrderSuccessComponent } from './pages/buyer-order-success/buyer-order-success';
+import { BuyerOrdersComponent } from './pages/buyer-orders/buyer-orders';
+import { BuyerPaymentComponent } from './pages/buyer-payment/buyer-payment';
+import { BuyerPaymentConfirmComponent } from './pages/buyer-payment-confirm/buyer-payment-confirm';
+import { BuyerPaymentFailureComponent } from './pages/buyer-payment-failure/buyer-payment-failure';
+import { BuyerPaymentsComponent } from './pages/buyer-payments/buyer-payments';
+import { BuyerPaymentDetailComponent } from './pages/buyer-payment-detail/buyer-payment-detail';
+import { BuyerDeliveriesComponent } from './pages/buyer-deliveries/buyer-deliveries';
+import { BuyerNotificationsComponent } from './pages/buyer-notifications/buyer-notifications';
 
 export const routes: Routes = [
   {
@@ -141,6 +150,42 @@ export const routes: Routes = [
   {
     path: 'delivery/:orderId',
     component: BuyerDeliveryDetailComponent,
+  },
+  {
+    path: 'order-success/:orderId',
+    component: BuyerOrderSuccessComponent,
+  },
+  {
+    path: 'buyer-orders',
+    component: BuyerOrdersComponent,
+  },
+  {
+    path: 'payment',
+    component: BuyerPaymentComponent,
+  },
+  {
+    path: 'payment/confirm',
+    component: BuyerPaymentConfirmComponent,
+  },
+  {
+    path: 'payment-failure',
+    component: BuyerPaymentFailureComponent,
+  },
+  {
+    path: 'my-payments',
+    component: BuyerPaymentsComponent,
+  },
+  {
+    path: 'my-payments/:id',
+    component: BuyerPaymentDetailComponent,
+  },
+  {
+    path: 'my-deliveries',
+    component: BuyerDeliveriesComponent,
+  },
+  {
+    path: 'notifications',
+    component: BuyerNotificationsComponent,
   },
   {
     path: '**',

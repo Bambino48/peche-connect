@@ -1,0 +1,41 @@
+<section class="payment-page">
+
+  <!-- HEADER -->
+  <div class="page-header">
+    <h1>Paiement</h1>
+
+    <button class="btn-back" routerLink="/checkout">
+        Retour
+    </button>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="payment-summary">
+    <p>Commande #{{ order.id }}</p>
+    <h2>{{ order.total_price | number }} FCFA</h2>
+  </div>
+
+  <!-- METHODS -->
+  <div class="payment-methods">
+
+    <!-- Mobile Money -->
+    <div class="payment-card" (click)="payWithMobileMoney()">
+      <h3>Mobile Money</h3>
+      <p>Payer avec Orange Money, MTN, Wave…</p>
+    </div>
+
+    <!-- Carte bancaire -->
+    <div class="payment-card" (click)="payWithCard()">
+      <h3>Carte bancaire</h3>
+      <p>Visa / Mastercard</p>
+    </div>
+
+    <!-- Paiement à la livraison -->
+    <div class="payment-card delivery" (click)="payOnDelivery()">
+      <h3>Paiement à la livraison</h3>
+      <p>Payez lors de la réception</p>
+    </div>
+
+  </div>
+
+</section>

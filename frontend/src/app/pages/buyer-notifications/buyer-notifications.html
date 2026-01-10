@@ -1,0 +1,58 @@
+<section class="notifications-page">
+
+  <!-- HEADER -->
+  <div class="page-header">
+    <h1>Notifications</h1>
+    <p class="subtitle">
+      Suivez l’activité de vos commandes, paiements et livraisons
+    </p>
+  </div>
+
+  <!-- LISTE -->
+  <div class="notifications-list">
+
+    <div
+      class="notification-card"
+      *ngFor="let n of notifications"
+      [class.unread]="!n.read"
+      [routerLink]="n.link"
+    >
+
+      <!-- ICON -->
+      <div class="icon">
+
+        <!-- COMMANDE -->
+        <svg *ngIf="n.type === 'order'" viewBox="0 0 24 24">
+          <path d="M4 4h16v16H4z"/>
+          <path d="M8 8h8M8 12h8M8 16h5"/>
+        </svg>
+
+        <!-- PAIEMENT -->
+        <svg *ngIf="n.type === 'payment'" viewBox="0 0 24 24">
+          <rect x="2" y="5" width="20" height="14" rx="2"/>
+          <path d="M2 9h20"/>
+          <path d="M6 15h4"/>
+        </svg>
+
+        <!-- LIVRAISON -->
+        <svg *ngIf="n.type === 'delivery'" viewBox="0 0 24 24">
+          <path d="M3 6h13v9H3z"/>
+          <path d="M16 9h4l1 3v3h-5z"/>
+          <circle cx="7" cy="18" r="1"/>
+          <circle cx="17" cy="18" r="1"/>
+        </svg>
+
+      </div>
+
+      <!-- CONTENT -->
+      <div class="content">
+        <h4>{{ n.title }}</h4>
+        <p>{{ n.message }}</p>
+        <span class="date">{{ n.created_at }}</span>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>

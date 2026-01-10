@@ -1,0 +1,55 @@
+<section class="deliveries-page">
+
+  <!-- HEADER -->
+  <div class="page-header">
+    <div>
+      <h1>Mes livraisons</h1>
+      <p class="subtitle">
+        Suivez l’état de livraison de vos commandes
+      </p>
+    </div>
+
+    <a routerLink="/buyer-dashboard" class="btn-back">
+      Tableau de bord
+    </a>
+  </div>
+
+  <!-- LIST -->
+  <div class="deliveries-list">
+
+    <div
+      class="delivery-card"
+      *ngFor="let delivery of deliveries"
+    >
+
+      <div class="delivery-main">
+        <h3>Commande #{{ delivery.order_id }}</h3>
+
+        <span
+          class="status"
+          [ngClass]="getStatusClass(delivery.delivery_status)"
+        >
+          {{ delivery.delivery_status }}
+        </span>
+      </div>
+
+      <p class="meta">
+        <strong>Livreur :</strong> {{ delivery.delivery_person }}
+      </p>
+
+      <p class="meta">
+        <strong>Horaire :</strong> {{ delivery.delivery_time }}
+      </p>
+
+      <a
+        class="link"
+        [routerLink]="['/delivery', delivery.order_id]"
+      >
+        Voir le suivi
+      </a>
+
+    </div>
+
+  </div>
+
+</section>

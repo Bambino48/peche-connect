@@ -1,0 +1,47 @@
+<section class="payments-page">
+
+  <!-- HEADER -->
+  <div class="page-header">
+    <h1>Mes paiements</h1>
+
+    <a routerLink="/buyer-dashboard" class="btn-back">
+      Tableau de bord
+    </a>
+  </div>
+
+  <!-- LISTE -->
+  <div class="payments-list">
+
+    <div
+      class="payment-card"
+      *ngFor="let payment of payments"
+      [routerLink]="['/my-payments', payment.id]"
+    >
+
+      <div class="left">
+        <strong>{{ payment.payment_method }}</strong>
+        <span class="date">{{ payment.paid_at }}</span>
+      </div>
+
+      <div class="right">
+        <span
+          class="status"
+          [ngClass]="getStatusClass(payment.status)"
+        >
+          {{ payment.status }}
+        </span>
+
+        <strong class="amount">
+          {{ payment.amount | number }} FCFA
+        </strong>
+      </div>
+
+    </div>
+
+    <p *ngIf="payments.length === 0" class="empty">
+      Aucun paiement effectué pour le moment.
+    </p>
+
+  </div>
+
+</section>

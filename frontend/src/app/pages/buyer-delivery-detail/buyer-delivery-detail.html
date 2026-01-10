@@ -3,76 +3,101 @@
   <!-- HEADER -->
   <div class="page-header">
     <div>
-      <h1>Suivi de la livraison</h1>
+      <h1>Suivi de livraison</h1>
       <p class="subtitle">
-        Commande #{{ delivery.order_id }}
+        Commande #{{ orderId }}
       </p>
     </div>
 
-    <button class="btn-back" routerLink="/my-orders/{{ delivery.order_id }}">
-      Retour
-    </button>
+    <a routerLink="/my-orders" class="btn-outline">
+      Mes commandes
+    </a>
   </div>
 
-  <!-- SUMMARY -->
-  <div class="delivery-summary">
+  <!-- DELIVERY CARD -->
+  <div class="delivery-card">
 
-    <!-- LIVRAISON -->
-    <div class="summary-card">
-      <h3>Livraison</h3>
+    <!-- STATUS -->
+    <div class="delivery-status">
+      <span
+        class="status-badge"
+        [ngClass]="getStatusClass(delivery.delivery_status)"
+      >
+        {{ delivery.delivery_status }}
+      </span>
 
-      <div class="summary-row">
-        <span>Statut</span>
-        <span
-          class="status"
-          [ngClass]="getStatusClass(delivery.delivery_status)"
-        >
-          {{ delivery.delivery_status }}
-        </span>
-      </div>
-
-      <div class="summary-row">
-        <span>Livreur</span>
-        <strong>{{ delivery.delivery_person }}</strong>
-      </div>
-
-      <div class="summary-row">
-        <span>Heure estimée</span>
-        <strong>{{ delivery.delivery_time }}</strong>
-      </div>
+      <p class="delivery-time">
+        Livraison prévue : <strong>{{ delivery.delivery_time }}</strong>
+      </p>
     </div>
 
     <!-- TIMELINE -->
-    <div class="summary-card">
-      <h3>Avancement</h3>
+    <div class="timeline">
 
-      <ul class="timeline">
-        <li class="done">
-          <span class="dot"></span>
-          Commande confirmée
-        </li>
+      <!-- ÉTAPE 1 -->
+      <div class="timeline-step completed">
+        <div class="icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M5 12l5 5L20 7"
+              stroke="currentColor"
+              stroke-width="2"
+              fill="none"
+              stroke-linecap="round"/>
+          </svg>
+        </div>
+        <span>Préparation</span>
+      </div>
 
-        <li
-          [class.done]="delivery.delivery_status !== 'En préparation'"
-        >
-          <span class="dot"></span>
-          Préparation
-        </li>
+      <!-- ÉTAPE 2 -->
+      <div
+        class="timeline-step"
+        [class.completed]="delivery.delivery_status !== 'En préparation'"
+      >
+        <div class="icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M3 7h13v10H3zM16 10h4l1 3v4h-5"
+              stroke="currentColor"
+              stroke-width="2"
+              fill="none"
+              stroke-linejoin="round"/>
+            <circle cx="7" cy="19" r="1.5"/>
+            <circle cx="17" cy="19" r="1.5"/>
+          </svg>
+        </div>
+        <span>En route</span>
+      </div>
 
-        <li
-          [class.done]="delivery.delivery_status === 'En route' || delivery.delivery_status === 'Livrée'"
-        >
-          <span class="dot"></span>
-          En route
-        </li>
+      <!-- ÉTAPE 3 -->
+      <div
+        class="timeline-step"
+        [class.completed]="delivery.delivery_status === 'Livrée'"
+      >
+        <div class="icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 2l9 4v6c0 5-4 9-9 10-5-1-9-5-9-10V6l9-4z"
+              stroke="currentColor"
+              stroke-width="2"
+              fill="none"/>
+          </svg>
+        </div>
+        <span>Livrée</span>
+      </div>
 
-        <li
-          [class.done]="delivery.delivery_status === 'Livrée'"
-        >
-          <span class="dot"></span>
-          Livrée
-        </li>
-      </ul>
+    </div>
+
+    <!-- LIVREUR -->
+    <div class="delivery-person">
+      <svg viewBox="0 0 24 24" class="icon">
+        <path d="M12 12a5 5 0 100-10 5 5 0 000 10zM3 22a9 9 0 0118 0"
+          stroke="currentColor"
+          stroke-width="2"
+          fill="none"/>
+      </svg>
+
+      <div>
+        <strong>Livreur</strong>
+        <p>{{ delivery.delivery_person }}</p>
+      </div>
     </div>
 
   </div>

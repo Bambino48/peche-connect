@@ -1,0 +1,91 @@
+<section class="payment-detail-page">
+
+  <!-- HEADER -->
+  <div class="page-header">
+    <div>
+      <h1>Paiement #{{ payment.id }}</h1>
+      <p class="subtitle">
+        Effectué le {{ payment.paid_at }}
+      </p>
+    </div>
+
+    <a routerLink="/my-payments" class="btn-back">
+      Mes paiements
+    </a>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="payment-summary">
+
+    <!-- PAIEMENT -->
+    <div class="summary-card">
+      <h3>Détails du paiement</h3>
+
+      <div class="summary-row">
+        <span>Statut</span>
+        <span
+          class="status"
+          [ngClass]="getStatusClass(payment.payment_status)"
+        >
+          {{ payment.payment_status }}
+        </span>
+      </div>
+
+      <div class="summary-row">
+        <span>Méthode</span>
+        <strong>{{ payment.payment_method }}</strong>
+      </div>
+
+      <div class="summary-row">
+        <span>Référence</span>
+        <strong>{{ payment.transaction_reference }}</strong>
+      </div>
+
+      <div class="summary-row">
+        <span>Date</span>
+        <strong>{{ payment.paid_at }}</strong>
+      </div>
+    </div>
+
+    <!-- COMMANDE -->
+    <div class="summary-card">
+      <h3>Commande associée</h3>
+
+      <div class="summary-row">
+        <span>Commande</span>
+        <a
+          class="link"
+          [routerLink]="['/my-orders', payment.order_id]"
+        >
+          Commande #{{ payment.order_id }}
+        </a>
+      </div>
+
+      <div class="summary-row">
+        <span>Montant payé</span>
+        <strong class="amount">
+          {{ payment.amount | number }} FCFA
+        </strong>
+      </div>
+
+      <div class="summary-row">
+        <span>Reçu</span>
+
+        <a
+          *ngIf="payment.receipt_url"
+          class="link"
+          [href]="payment.receipt_url"
+          target="_blank"
+        >
+          Télécharger le reçu
+        </a>
+
+        <span *ngIf="!payment.receipt_url" class="muted">
+          Non disponible
+        </span>
+      </div>
+    </div>
+
+  </div>
+
+</section>

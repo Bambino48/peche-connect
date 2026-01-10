@@ -41,7 +41,7 @@
     </div>
 
     <!-- COMMANDES -->
-    <div class="dashboard-card" routerLink="/my-orders">
+    <div class="dashboard-card" routerLink="/buyer-orders">
       <div class="card-icon">
         <!-- Commandes -->
         <svg viewBox="0 0 24 24">
@@ -53,8 +53,22 @@
       <p>Historique et statut de vos commandes</p>
     </div>
 
-    <!-- LIVRAISON -->
-    <div class="dashboard-card" routerLink="/delivery/1">
+    <!-- PAIEMENTS -->
+    <div class="dashboard-card" routerLink="/my-payments">
+      <div class="card-icon">
+        <!-- Carte bancaire -->
+        <svg viewBox="0 0 24 24">
+          <rect x="2" y="5" width="20" height="14" rx="2"/>
+          <path d="M2 9h20"/>
+          <path d="M6 15h4"/>
+        </svg>
+      </div>
+      <h3>Mes paiements</h3>
+      <p>Consulter vos paiements et reçus</p>
+    </div>
+
+    <!-- LIVRAISONS -->
+    <div class="dashboard-card" routerLink="/my-deliveries">
       <div class="card-icon">
         <!-- Camion -->
         <svg viewBox="0 0 24 24">
@@ -64,7 +78,7 @@
           <circle cx="17" cy="18" r="1"/>
         </svg>
       </div>
-      <h3>Suivi livraison</h3>
+      <h3>Mes livraisons</h3>
       <p>Suivre l’acheminement de vos commandes</p>
     </div>
 
