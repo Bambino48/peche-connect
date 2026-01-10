@@ -3,6 +3,7 @@
     <h1>Inscription</h1>
 
     <form (ngSubmit)="submit()">
+
       <input
         type="text"
         placeholder="Nom complet"
@@ -40,16 +41,29 @@
         [(ngModel)]="formData.role"
         required
       >
-        <option value="" disabled>
-          Sélectionnez votre rôle
-        </option>
+        <option value="" disabled>Sélectionnez votre rôle</option>
         <option value="BUYER">Acheteur</option>
         <option value="SELLER">Pêcheur / Vendeur</option>
       </select>
 
-      <button type="submit">
-        Créer mon compte
+      <!-- ✅ MESSAGE SUCCÈS -->
+      <p class="success" *ngIf="successMessage">
+        {{ successMessage }}
+      </p>
+
+      <!-- ❌ MESSAGE ERREUR -->
+      <p class="error" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </p>
+
+      <button
+        type="submit"
+        class="btn-primary"
+        [disabled]="loading"
+      >
+        {{ loading ? 'Création...' : 'Créer mon compte' }}
       </button>
+
     </form>
   </div>
 </section>

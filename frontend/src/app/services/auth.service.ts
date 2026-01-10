@@ -30,7 +30,18 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
+  /** 🎭 Rôle */
+  saveRole(role: string) {
+    localStorage.setItem('role', role);
+  }
+
+  getRole(): string | null {
+    return localStorage.getItem('role');
+  }
+
+  /** 🚪 Déconnexion */
   logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('role');
   }
 }
