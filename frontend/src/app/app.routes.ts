@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { authGuard } from './guards/auth.guard';
 
 import { HomeComponent } from './pages/home/home';
 import { LoginComponent } from './pages/login/login';
@@ -39,156 +40,99 @@ import { BuyerDeliveriesComponent } from './pages/buyer-deliveries/buyer-deliver
 import { BuyerNotificationsComponent } from './pages/buyer-notifications/buyer-notifications';
 
 export const routes: Routes = [
-  {
-    path: '',
-    component: HomeComponent,
-  },
-  {
-    path: 'login',
-    component: LoginComponent,
-  },
-  {
-    path: 'register',
-    component: RegisterComponent,
-  },
-  {
-    path: 'profile',
-    component: ProfileComponent
-  },
-  {
-    path: 'profile-edit',
-    component: ProfileEditComponent
-  },
-  {
-    path: 'actions',
-    component: ActionsComponent
-  },
+  { path: '', component: HomeComponent },
+
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+
+  { path: 'profile', component: ProfileComponent },
+  { path: 'profile-edit', component: ProfileEditComponent },
+
+  { path: 'actions', component: ActionsComponent },
+
   {
     path: 'dashboard',
-    component: Dashboard
+    component: Dashboard,
+    canActivate: [authGuard],
+    data: { role: 'SELLER' }
   },
+
   {
     path: 'products',
     component: ProductsComponent,
+    canActivate: [authGuard],
+    data: { role: 'SELLER' }
   },
-  {
-    path: 'products/add',
-    component: AddProductComponent,
-  },
-  {
-    path: 'products/edit/:id',
-    component: ProductEditComponent,
-  },
+
+  { path: 'products/add', component: AddProductComponent },
+  { path: 'products/edit/:id', component: ProductEditComponent },
+
   {
     path: 'orders',
     component: OrdersComponent,
+    canActivate: [authGuard],
+    data: { role: 'SELLER' }
   },
-  {
-    path: 'orders/:id',
-    component: SellerOrderDetailComponent,
-  },
-  {
-    path: 'stock',
-    component: StockComponent,
-  },
-  {
-    path: 'stock/edit/:id',
-    component: StockEditComponent,
-  },
-  {
-    path: 'payments',
-    component: PaymentsComponent,
-  },
-  {
-    path: 'payments/:id',
-    component: PaymentsDetailComponent,
-  },
-  {
-    path: 'deliveries',
-    component: DeliveriesComponent,
-  },
-  {
-    path: 'deliveries/:id',
-    component: DeliveryDetailComponent,
-  },
-  {
-    path: 'delivery/settings',
-    component: DeliverySettingsComponent,
-  },
+
+  { path: 'orders/:id', component: SellerOrderDetailComponent },
+
+  { path: 'stock', component: StockComponent },
+  { path: 'stock/edit/:id', component: StockEditComponent },
+
+  { path: 'payments', component: PaymentsComponent },
+  { path: 'payments/:id', component: PaymentsDetailComponent },
+
+  { path: 'deliveries', component: DeliveriesComponent },
+  { path: 'deliveries/:id', component: DeliveryDetailComponent },
+  { path: 'delivery/settings', component: DeliverySettingsComponent },
+
   {
     path: 'buyer-dashboard',
     component: BuyerDashboardComponent,
+    canActivate: [authGuard],
+    data: { role: 'BUYER' }
   },
-  {
-    path: 'shop',
-    component: ShopComponent,
-  },
-  {
-    path: 'shop/:id',
-    component: ShopProductComponent,
-  },
-  {
-    path: 'shop/product/:id',
-    component: ShopProductDetailComponent,
-  },
+
+  { path: 'shop', component: ShopComponent },
+  { path: 'shop/:id', component: ShopProductComponent },
+  { path: 'shop/product/:id', component: ShopProductDetailComponent },
+
   {
     path: 'cart',
     component: CartComponent,
+    canActivate: [authGuard],
+    data: { role: 'BUYER' }
   },
+
   {
     path: 'checkout',
     component: CheckoutComponent,
+    canActivate: [authGuard],
+    data: { role: 'BUYER' }
   },
+
   {
     path: 'my-orders',
     component: MesCommandesComponent,
+    canActivate: [authGuard],
+    data: { role: 'BUYER' }
   },
-  {
-    path: 'my-orders/:id',
-    component: BuyerOrderDetailComponent,
-  },
-  {
-    path: 'delivery/:orderId',
-    component: BuyerDeliveryDetailComponent,
-  },
-  {
-    path: 'order-success/:orderId',
-    component: BuyerOrderSuccessComponent,
-  },
-  {
-    path: 'buyer-orders',
-    component: BuyerOrdersComponent,
-  },
-  {
-    path: 'payment',
-    component: BuyerPaymentComponent,
-  },
-  {
-    path: 'payment/confirm',
-    component: BuyerPaymentConfirmComponent,
-  },
-  {
-    path: 'payment-failure',
-    component: BuyerPaymentFailureComponent,
-  },
-  {
-    path: 'my-payments',
-    component: BuyerPaymentsComponent,
-  },
-  {
-    path: 'my-payments/:id',
-    component: BuyerPaymentDetailComponent,
-  },
-  {
-    path: 'my-deliveries',
-    component: BuyerDeliveriesComponent,
-  },
-  {
-    path: 'notifications',
-    component: BuyerNotificationsComponent,
-  },
-  {
-    path: '**',
-    redirectTo: '',
-  },
+
+  { path: 'my-orders/:id', component: BuyerOrderDetailComponent },
+  { path: 'delivery/:orderId', component: BuyerDeliveryDetailComponent },
+  { path: 'order-success/:orderId', component: BuyerOrderSuccessComponent },
+
+  { path: 'buyer-orders', component: BuyerOrdersComponent },
+
+  { path: 'payment', component: BuyerPaymentComponent },
+  { path: 'payment/confirm', component: BuyerPaymentConfirmComponent },
+  { path: 'payment-failure', component: BuyerPaymentFailureComponent },
+
+  { path: 'my-payments', component: BuyerPaymentsComponent },
+  { path: 'my-payments/:id', component: BuyerPaymentDetailComponent },
+
+  { path: 'my-deliveries', component: BuyerDeliveriesComponent },
+  { path: 'notifications', component: BuyerNotificationsComponent },
+
+  { path: '**', redirectTo: '' },
 ];
