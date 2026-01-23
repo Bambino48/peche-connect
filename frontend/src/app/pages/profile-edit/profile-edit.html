@@ -2,43 +2,96 @@
   <div class="edit-card">
     <h1>Modifier mon profil</h1>
 
-    <!-- Photo -->
-    <div class="photo-section">
-      <div class="avatar">
-        <img *ngIf="previewPhoto; else placeholder" [src]="previewPhoto" alt="Photo de profil" />
-
-        <ng-template #placeholder>
-          <span>Photo</span>
-        </ng-template>
-      </div>
-
-      <input type="file" accept="image/*" hidden #fileInput (change)="onPhotoSelected($event)" />
-
-      <button type="button" class="photo-btn" (click)="fileInput.click()">
-        Changer la photo
-      </button>
+    <!-- Message de succès -->
+    <div *ngIf="successMessage" class="success-banner">
+      {{ successMessage }}
     </div>
 
-    <!-- Formulaire -->
-    <form (ngSubmit)="saveProfile()">
-      <input type="text" placeholder="Nom complet" [(ngModel)]="user.full_name" name="fullName" required />
+    <!-- Message d'erreur -->
+    <div *ngIf="errorMessage" class="error-banner">
+      ⚠️ {{ errorMessage }}
+    </div>
 
-      <input type="tel" placeholder="Téléphone" [(ngModel)]="user.phone" name="phone" required />
+    <!-- Toast -->
+    <div *ngIf="showToast" class="toast" [ngClass]="toastType">
+      {{ toastMessage }}
+    </div>
 
-      <input type="email" placeholder="Email" [(ngModel)]="user.email" name="email" required />
+    <!-- Chargement -->
+    <div *ngIf="isLoading" class="loading-state">
+      <p>Chargement de vos données...</p>
+    </div>
 
-      <input type="text" placeholder="Localisation" [(ngModel)]="user.location" name="location" />
+    <!-- Contenu principal -->
+    <div *ngIf="!isLoading" class="form-container">
+      <!-- Photo -->
+      <div class="photo-section">
+        <div class="avatar">
+          <img *ngIf="previewPhoto; else placeholder" [src]="previewPhoto" alt="Photo de profil" />
 
-      <!-- Boutons -->
-      <div class="actions">
-        <button type="submit" class="btn-primary">
-          Enregistrer
+          <ng-template #placeholder>
+            <span>Photo</span>
+          </ng-template>
+        </div>
+
+        <input type="file" accept="image/*" hidden #fileInput (change)="onPhotoSelected($event)" />
+
+        <button type="button" class="photo-btn" (click)="fileInput.click()">
+          Choisir une photo
         </button>
 
-        <button type="button" class="btn-secondary" (click)="cancel()">
-          Annuler
+        <button type="button" class="photo-btn" (click)="uploadPhoto()"
+          [disabled]="isUploadingPhoto || !selectedPhotoFile">
+          {{ isUploadingPhoto ? 'Téléchargement...' : 'Changer la photo' }}
         </button>
       </div>
-    </form>
+
+      <!-- Formulaire réactif -->
+      <form [formGroup]="profileForm" (ngSubmit)="saveProfile()">
+        <!-- Nom complet -->
+        <div class="form-group">
+          <label for="fullName">Nom complet</label>
+          <input id="fullName" type="text" formControlName="fullName" placeholder="Nom complet" />
+          <span *ngIf="profileForm.get('fullName')?.invalid && profileForm.get('fullName')?.touched" class="error-text">
+            Veuillez entrer un nom valide (au minimum 2 caractères)
+          </span>
+        </div>
+
+        <!-- Téléphone -->
+        <div class="form-group">
+          <label for="phone">Téléphone</label>
+          <input id="phone" type="tel" formControlName="phone" placeholder="Téléphone (10 chiffres)" />
+          <span *ngIf="profileForm.get('phone')?.invalid && profileForm.get('phone')?.touched" class="error-text">
+            Veuillez entrer un numéro valide (10 chiffres)
+          </span>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input id="email" type="email" formControlName="email" placeholder="Email" />
+          <span *ngIf="profileForm.get('email')?.invalid && profileForm.get('email')?.touched" class="error-text">
+            Veuillez entrer un email valide
+          </span>
+        </div>
+
+        <!-- Localisation -->
+        <div class="form-group">
+          <label for="location">Localisation</label>
+          <input id="location" type="text" formControlName="location" placeholder="Ville, Pays" />
+        </div>
+
+        <!-- Boutons -->
+        <div class="actions">
+          <button type="submit" class="btn-primary" [disabled]="isSaving || profileForm.invalid">
+            {{ isSaving ? 'Enregistrement...' : 'Enregistrer' }}
+          </button>
+
+          <button type="button" class="btn-secondary" (click)="cancel()" [disabled]="isSaving">
+            Annuler
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
 </section>
