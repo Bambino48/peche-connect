@@ -19,57 +19,69 @@
   </div>
 
   <!-- CHARGEMENT -->
-  <div *ngIf="isLoading" class="loading-state">
+  <div *ngIf="loading" class="loading-state">
     Chargement des produits...
   </div>
 
   <!-- ERREUR -->
-  <div *ngIf="!isLoading && errorMessage" class="error-banner">
+  <div *ngIf="!loading && errorMessage" class="error-banner">
     ⚠️ {{ errorMessage }}
   </div>
 
   <!-- LISTE -->
-  <ng-container *ngIf="!isLoading && !errorMessage">
-    <div class="empty-state" *ngIf="(products$ | async)?.length === 0">
+  <ng-container *ngIf="!loading && !errorMessage">
+    <div class="empty-state" *ngIf="activeProducts.length === 0">
       Aucun produit pour le moment.
     </div>
 
-    <div class="products-grid" *ngIf="(products$ | async)?.length">
-      <div class="product-card" *ngFor="let product of (products$ | async)">
-        <div class="card-header">
-          <div>
-            <h3>{{ product.nomLocal }}</h3>
-            <span class="scientific">{{ product.nomScientifique }}</span>
+    <div class="products-grid" *ngIf="activeProducts.length">
+      <ng-container *ngFor="let product of activeProducts">
+        <div class="product-card">
+          <div class="card-media">
+            <ng-container *ngIf="product.photoUrl; else photoFallback">
+              <img [src]="product.photoUrl"
+                [alt]="product.fishType === 'AUTRE' ? (product.otherFishName || 'Poisson') : (product.fishType || 'Poisson')" />
+            </ng-container>
+            <ng-template #photoFallback>
+              <div class="image-placeholder">Photo indisponible</div>
+            </ng-template>
           </div>
 
-          <span class="status" [ngClass]="{
-              available: product.etatProduit === 'Disponible',
-              unavailable: product.etatProduit === 'Indisponible'
-            }">
-            {{ product.etatProduit }}
-          </span>
-        </div>
+          <div class="card-header">
+            <div>
+              <h3>{{ product.fishType === 'AUTRE' ? (product.otherFishName || 'Poisson') : (product.fishType ||
+                'Poisson')
+                }}</h3>
+              <span class="scientific">{{ product.fishType || '—' }}</span>
+            </div>
 
-        <div class="card-body">
-          <div><strong>Type :</strong> {{ product.typeProduit }}</div>
-          <div><strong>Zone :</strong> {{ product.zonePeche }}</div>
-          <div><strong>Date :</strong> {{ product.datePeche }}</div>
-          <div><strong>Taille :</strong> {{ product.tailleMoyenne }} cm</div>
-          <div><strong>Qualité :</strong> {{ product.qualite }}</div>
-          <div><strong>Conservation :</strong> {{ product.modeConservation }}</div>
-          <div><strong>Halal :</strong> {{ product.halal }}</div>
-        </div>
+            <span class="status available">
+              {{ product.status || '—' }}
+            </span>
+          </div>
 
-        <div class="card-actions">
-          <button class="btn-edit" [routerLink]="['/products/edit', product.id]">
-            Modifier
-          </button>
+          <div class="card-body">
+            <div><strong>Prix/kg :</strong> {{ product.pricePerKg !== null && product.pricePerKg !== undefined ?
+              (product.pricePerKg + ' FCFA / kg') : '—' }}</div>
+            <div><strong>Quantité :</strong> {{ product.quantityKg !== null && product.quantityKg !== undefined ?
+              (product.quantityKg + ' kg') : '—' }}</div>
+            <div><strong>Zone :</strong> {{ product.fishingZone || '—' }}</div>
+            <div><strong>Date :</strong> {{ product.fishingDate || '—' }}</div>
+            <div><strong>Conservation :</strong> {{ product.conservationMethod ?? 'Non précisé' }}</div>
+            <div><strong>Vendeur :</strong> {{ product.sellerType || '—' }}</div>
+          </div>
 
-          <button class="btn-delete">
-            Supprimer
-          </button>
+          <div class="card-actions">
+            <button class="btn-edit" [routerLink]="['/products/edit', product.id]">
+              Modifier
+            </button>
+
+            <button class="btn-delete">
+              Supprimer
+            </button>
+          </div>
         </div>
-      </div>
+      </ng-container>
     </div>
   </ng-container>
 
