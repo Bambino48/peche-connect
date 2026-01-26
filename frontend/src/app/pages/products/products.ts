@@ -1,44 +1,39 @@
-import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { Product, ProductService } from '../../services/product.service';
 
 @Component({
   selector: 'app-products',
-  imports: [CommonModule, RouterModule, FormsModule],
+  imports: [CommonModule, RouterModule],
   standalone: true,
   templateUrl: './products.html',
   styleUrl: './products.scss',
 })
-export class ProductsComponent {
+export class ProductsComponent implements OnInit {
+  products$: Observable<Product[]>;
+  isLoading = true;
+  errorMessage: string | null = null;
 
-  products = [
-  {
-    id: 1,
-    name_local: 'Thon rouge',
-    name_scientific: 'Thunnus thynnus',
-    fish_type: 'Poisson',
-    fishing_zone: 'Atlantique',
-    fishing_date: '2025-12-15',
-    average_size: 40,
-    quality_grade: 'A',
-    conservation_method: 'Frais',
-    halal: true,
-    state: 'Disponible'
-  },
-  {
-    id: 2,
-    name_local: 'Sardine',
-    name_scientific: 'Sardina pilchardus',
-    fish_type: 'Poisson',
-    fishing_zone: 'Méditerranée',
-    fishing_date: '2025-12-10',
-    average_size: 18,
-    quality_grade: 'B',
-    conservation_method: 'Congelé',
-    halal: true,
-    state: 'Indisponible'
+  constructor(private productService: ProductService) {
+    this.products$ = this.productService.products$;
   }
-];
 
+  ngOnInit(): void {
+    this.isLoading = true;
+    this.errorMessage = null;
+
+    this.productService.loadProducts().subscribe({
+      next: () => {
+        this.isLoading = false;
+      },
+      error: (err) => {
+        console.error('[ProductsComponent] Error loading products:', err);
+        this.isLoading = false;
+        this.errorMessage =
+          err?.error?.message || 'Erreur lors du chargement des produits. Veuillez réessayer.';
+      },
+    });
+  }
 }

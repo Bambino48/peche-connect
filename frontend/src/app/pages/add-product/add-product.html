@@ -5,100 +5,119 @@
   </p>
 
   <div class="form-card">
-    <form (ngSubmit)="submitProduct()">
+    <!-- Toast -->
+    <div *ngIf="showToast" class="toast" [ngClass]="toastType">
+      {{ toastMessage }}
+    </div>
+
+    <!-- Message de succès -->
+    <div *ngIf="successMessage" class="success-banner">
+      {{ successMessage }}
+    </div>
+
+    <!-- Message d'erreur -->
+    <div *ngIf="errorMessage" class="error-banner">
+      ⚠️ {{ errorMessage }}
+    </div>
+
+    <form [formGroup]="productForm" (ngSubmit)="submitProduct()">
 
       <div class="form-group">
-        <label>Nom local</label>
-        <input type="text" [(ngModel)]="product.name_local" name="name_local" required />
-      </div>
-
-      <div class="form-group">
-        <label>Nom scientifique</label>
-        <input type="text" [(ngModel)]="product.name_scientific" name="name_scientific" />
-      </div>
-
-      <div class="form-group">
-        <label>Type de produit</label>
-        <select [(ngModel)]="product.fish_type" name="fish_type" required>
+        <label>Type de poisson</label>
+        <select formControlName="fishType" required>
           <option value="">-- Choisir --</option>
-          <option value="Poisson">Poisson</option>
-          <option value="Crustacé">Crustacé</option>
-          <option value="Mollusque">Mollusque</option>
+          <option value="THON">Thon</option>
+          <option value="TILAPIA">Tilapia</option>
+          <option value="CAPITAINE">Capitaine</option>
+          <option value="CREVETTE">Crevette</option>
+          <option value="AUTRE">Autre</option>
         </select>
       </div>
 
+      <div class="form-group" *ngIf="productForm.get('fishType')?.value === 'AUTRE'">
+        <label>Autre poisson</label>
+        <input type="text" formControlName="otherFishName" placeholder="Précisez"
+          [required]="productForm.get('fishType')?.value === 'AUTRE'" />
+      </div>
+
       <div class="form-group">
-        <label>Zone de pêche</label>
-        <input type="text" [(ngModel)]="product.fishing_zone" name="fishing_zone" />
+        <label>Nom local</label>
+        <input type="text" formControlName="localFishName" placeholder="Nom local du poisson" />
+      </div>
+
+      <div class="form-group">
+        <label>Quantité (kg) (min 0.01)</label>
+        <input type="number" formControlName="quantityKg" required min="0.01" step="0.01" />
+      </div>
+
+      <div class="form-group">
+        <label>Prix par kg (min 0.01)</label>
+        <input type="number" formControlName="pricePerKg" required min="0.01" step="0.01" />
       </div>
 
       <div class="form-group">
         <label>Date de pêche</label>
-        <input type="date" [(ngModel)]="product.fishing_date" name="fishing_date" />
+        <input type="date" formControlName="fishingDate" required />
       </div>
 
       <div class="form-group">
-        <label>Taille moyenne (cm)</label>
-        <input type="number" [(ngModel)]="product.average_size" name="average_size" />
-      </div>
-
-      <div class="form-group">
-        <label>Qualité</label>
-        <select [(ngModel)]="product.quality_grade" name="quality_grade">
+        <label>Zone de pêche</label>
+        <select formControlName="fishingZone" required>
           <option value="">-- Choisir --</option>
-          <option value="A">A</option>
-          <option value="B">B</option>
-          <option value="C">C</option>
+          <option value="MER">Mer</option>
+          <option value="LAGUNE">Lagune</option>
+          <option value="FLEUVE">Fleuve</option>
         </select>
       </div>
 
       <div class="form-group">
-        <label>Mode de conservation</label>
-        <select [(ngModel)]="product.conservation_method" name="conservation_method">
+        <label>Méthode de conservation</label>
+        <select formControlName="conservationMethod">
           <option value="">-- Choisir --</option>
-          <option value="Frais">Frais</option>
-          <option value="Congelé">Congelé</option>
-          <option value="Séché">Séché</option>
+          <option value="GLACE">Glace</option>
+          <option value="FRAIS">Frais</option>
+          <option value="CONGELE">Congelé</option>
         </select>
       </div>
 
-      <div class="form-group">
-        <label>Halal</label>
-        <select [(ngModel)]="product.halal" name="halal">
-          <option [ngValue]="true">Oui</option>
-          <option [ngValue]="false">Non</option>
-        </select>
+      <div class="form-group photo-field">
+        <label>Photo (URL)</label>
+        <input type="hidden" formControlName="photoUrl" required />
+        <button type="button" class="btn-secondary" (click)="openCamera()">
+          📷 Prendre une photo
+        </button>
+        <div *ngIf="isCameraOpen" class="camera-section">
+          <video #video autoplay playsinline muted></video>
+          <canvas #canvasElement hidden></canvas>
+          <div class="form-actions">
+            <button type="button" class="btn-primary" (click)="capturePhoto()">
+              📸 Capturer
+            </button>
+            <button type="button" class="btn-primary" (click)="savePhoto()" [disabled]="!pendingPhotoDataUrl">
+              💾 Enregistrer la photo
+            </button>
+            <button type="button" class="btn-secondary" (click)="stopCamera()">
+              ❌ Fermer
+            </button>
+          </div>
+        </div>
+        <div *ngIf="!isCameraOpen && photoPreviewUrl" class="photo-preview">
+          <img [src]="photoPreviewUrl" alt="Aperçu photo" />
+        </div>
       </div>
 
       <div class="form-group">
-        <label>Origine</label>
-        <select [(ngModel)]="product.origin_type" name="origin_type">
-          <option value="Sauvage">Sauvage</option>
-          <option value="Aquaculture">Aquaculture</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label>Saisonnalité</label>
-        <input type="text" [(ngModel)]="product.seasonality" name="seasonality" />
-      </div>
-
-      <div class="form-group">
-        <label>Certifications</label>
-        <input type="text" [(ngModel)]="product.certifications" name="certifications" />
-      </div>
-
-      <div class="form-group">
-        <label>État du produit</label>
-        <select [(ngModel)]="product.state" name="state">
-          <option value="Disponible">Disponible</option>
-          <option value="Indisponible">Indisponible</option>
+        <label>Statut</label>
+        <select formControlName="status" required>
+          <option value="ACTIF">Actif</option>
+          <option value="VENDU">Vendu</option>
+          <option value="DESACTIVE">Désactivé</option>
         </select>
       </div>
 
       <div class="form-actions">
-        <button type="submit" class="btn-primary">
-          Enregistrer
+        <button type="submit" class="btn-primary" [disabled]="isSubmitting || productForm.invalid || !photoSaved">
+          {{ isSubmitting ? 'Enregistrement...' : 'Enregistrer' }}
         </button>
 
         <button type="button" class="btn-secondary" (click)="goBack()">
