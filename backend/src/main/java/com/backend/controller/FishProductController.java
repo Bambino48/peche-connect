@@ -1,5 +1,6 @@
 package com.backend.controller;
 
+import com.backend.dto.FishProductResponse;
 import com.backend.model.FishProduct;
 import com.backend.service.FishProductService;
 import lombok.RequiredArgsConstructor;
@@ -15,27 +16,26 @@ public class FishProductController {
     private final FishProductService service;
 
     @PostMapping
-    public FishProduct create(@RequestBody FishProduct product) {
-        return service.create(product);
+    public FishProductResponse create(@RequestBody FishProduct product) {
+        return service.createAndReturnDto(product);
     }
 
     @GetMapping
-    public List<FishProduct> getAll() {
-        return service.getAll();
+    public List<FishProductResponse> getAll() {
+        return service.getAllDtos();
     }
 
     @GetMapping("/{id}")
-    public FishProduct get(@PathVariable Long id) {
-        return service.get(id);
+    public FishProductResponse get(@PathVariable Long id) {
+        return service.getDto(id);
     }
 
     @PutMapping("/{id}")
-    public FishProduct update(@PathVariable Long id, @RequestBody FishProduct data) {
-        FishProduct product = service.get(id);
-        product.setNameLocal(data.getNameLocal());
-        product.setState(data.getState());
-        product.setFishType(data.getFishType());
-        return service.create(product);
+    public FishProductResponse update(
+            @PathVariable Long id,
+            @RequestBody FishProduct data
+    ) {
+        return service.updateAndReturnDto(id, data);
     }
 
     @DeleteMapping("/{id}")

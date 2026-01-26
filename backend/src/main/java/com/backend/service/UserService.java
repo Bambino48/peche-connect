@@ -1,7 +1,9 @@
 package com.backend.service;
 
+import com.backend.model.Seller;
 import com.backend.model.User;
 import com.backend.model.enums.Role;
+import com.backend.repository.SellerRepository;
 import com.backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,18 +16,45 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final SellerRepository sellerRepository;
     private final PasswordEncoder passwordEncoder;
 
     // =======================
-    // ➕ CRÉATION UTILISATEUR (INSCRIPTION UNIQUEMENT)
+    // ➕ CRÉATION UTILISATEUR (INSCRIPTION)
     // =======================
     public User create(User user) {
+
+        // 🔐 Sécurité mot de passe
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
+
+        // 💾 Sauvegarde utilisateur
+        User savedUser = userRepository.save(user);
+
+        // 🐟 CRÉATION AUTOMATIQUE DU SELLER
+        if (savedUser.getRole() == Role.SELLER) {
+
+            // Sécurité anti-duplication
+            boolean alreadySeller =
+                    sellerRepository.findByUser_Id(savedUser.getId()).isPresent();
+
+            if (!alreadySeller) {
+
+                Seller seller = new Seller();
+                seller.setUser(savedUser);
+                seller.setSellerType("PECHEUR"); // valeur par défaut
+                seller.setVerified(false);
+                seller.setTotalSales(0.0);
+                seller.setAverageRating(0.0);
+
+                sellerRepository.save(seller);
+            }
+        }
+
+        return savedUser;
     }
 
     // =======================
-    // ✏️ MISE À JOUR UTILISATEUR (SANS TOUCHER AU MOT DE PASSE)
+    // ✏️ MISE À JOUR UTILISATEUR
     // =======================
     public User save(User user) {
         return userRepository.save(user);
@@ -40,14 +69,12 @@ public class UserService {
     }
 
     // =======================
-    // 🔐 UTILISATEUR CONNECTÉ (EMAIL OU TÉLÉPHONE)
+    // 🔐 UTILISATEUR CONNECTÉ
     // =======================
     public User getByEmail(String identifier) {
 
-        // 1️⃣ tentative par email
         return userRepository.findByEmail(identifier)
                 .orElseGet(() ->
-                        // 2️⃣ fallback par téléphone
                         userRepository.findByPhone(identifier)
                                 .orElseThrow(() ->
                                         new RuntimeException("Utilisateur introuvable")

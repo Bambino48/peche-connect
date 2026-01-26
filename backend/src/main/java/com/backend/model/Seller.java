@@ -15,6 +15,7 @@ public class Seller {
     private Long id;
 
     @OneToOne
+    @JoinColumn(name = "user_id", nullable = false, unique = true)
     private User user;
 
     private String sellerType; // PECHEUR / COOPERATIVE

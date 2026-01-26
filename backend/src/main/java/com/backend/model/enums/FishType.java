@@ -1,6 +1,9 @@
 package com.backend.model.enums;
 
 public enum FishType {
-    MER,
-    EAU_DOUCE
+    THON,
+    TILAPIA,
+    CAPITAINE,
+    CREVETTE,
+    AUTRE
 }
