@@ -19,8 +19,18 @@
   </div>
 
   <!-- CHARGEMENT -->
-  <div *ngIf="loading" class="loading-state">
-    Chargement des produits...
+  <div *ngIf="loading" class="products-grid skeleton-grid">
+    <div class="product-card skeleton-card" *ngFor="let _ of [1, 2, 3, 4, 5, 6]">
+      <div class="card-media skeleton-media"></div>
+      <div class="skeleton-line title"></div>
+      <div class="skeleton-line"></div>
+      <div class="skeleton-line"></div>
+      <div class="skeleton-line"></div>
+      <div class="skeleton-actions">
+        <div class="skeleton-button"></div>
+        <div class="skeleton-button"></div>
+      </div>
+    </div>
   </div>
 
   <!-- ERREUR -->
@@ -43,32 +53,41 @@
                 [alt]="product.fishType === 'AUTRE' ? (product.otherFishName || 'Poisson') : (product.fishType || 'Poisson')" />
             </ng-container>
             <ng-template #photoFallback>
-              <div class="image-placeholder">Photo indisponible</div>
+              <div class="image-placeholder">
+                <span class="placeholder-icon">🐟</span>
+                <span>Aucune image</span>
+              </div>
             </ng-template>
+            <div class="image-overlay"></div>
+            <span class="status-badge" [ngClass]="{
+                active: product.status === 'ACTIF',
+                sold: product.status === 'VENDU',
+                inactive: product.status === 'DESACTIVE'
+              }">
+              <span class="badge-dot">●</span>
+              {{ product.status || '—' }}
+            </span>
           </div>
 
           <div class="card-header">
             <div>
               <h3>{{ product.fishType === 'AUTRE' ? (product.otherFishName || 'Poisson') : (product.fishType ||
-                'Poisson')
-                }}</h3>
-              <span class="scientific">{{ product.fishType || '—' }}</span>
+                'Poisson') }}</h3>
+              <span class="subtitle">{{ product.fishingZone || '—' }} • {{ product.conservationMethod ?? 'Non précisé'
+                }}</span>
             </div>
-
-            <span class="status available">
-              {{ product.status || '—' }}
-            </span>
           </div>
 
           <div class="card-body">
-            <div><strong>Prix/kg :</strong> {{ product.pricePerKg !== null && product.pricePerKg !== undefined ?
-              (product.pricePerKg + ' FCFA / kg') : '—' }}</div>
-            <div><strong>Quantité :</strong> {{ product.quantityKg !== null && product.quantityKg !== undefined ?
-              (product.quantityKg + ' kg') : '—' }}</div>
-            <div><strong>Zone :</strong> {{ product.fishingZone || '—' }}</div>
-            <div><strong>Date :</strong> {{ product.fishingDate || '—' }}</div>
-            <div><strong>Conservation :</strong> {{ product.conservationMethod ?? 'Non précisé' }}</div>
-            <div><strong>Vendeur :</strong> {{ product.sellerType || '—' }}</div>
+            <div class="price">{{ product.pricePerKg !== null && product.pricePerKg !== undefined ? (product.pricePerKg
+              + ' FCFA / kg') : '—' }}</div>
+            <div class="meta">
+              <span>{{ product.quantityKg !== null && product.quantityKg !== undefined ? (product.quantityKg + ' kg
+                disponibles') : '—' }}</span>
+              <span class="meta-sep">•</span>
+              <span>{{ product.fishingDate | date:'d MMM yyyy' }}</span>
+            </div>
+            <div class="seller">Vendeur : {{ product.sellerType || '—' }}</div>
           </div>
 
           <div class="card-actions">
